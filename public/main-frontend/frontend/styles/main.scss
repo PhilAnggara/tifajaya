@@ -1,0 +1,176 @@
+body {
+  background-color: #000;
+  background-image: url("../../../frontend/images/jumbotron-bg.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+// Navbar
+.navbar-brand {
+  font-family: 'Viga', sans-serif;
+  font-size: 32px;
+}
+// End of navbar
+
+// Jumbotron
+.jumbotron {
+  background-image: linear-gradient(to bottom, rgba(0,0,0,.5), rgba(0,0,0,0));
+  text-align: center;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+
+  form {
+    input {
+      width: 250px !important;
+    }
+  }
+
+  .display-4 {
+    font-family: 'Viga', sans-serif;
+    color: white;
+    margin-top: 30px;
+    font-size: 60px;
+  }
+  .lead {
+    font-family: 'Assistant', sans-serif;
+    color: white;
+    margin-top: 10px;
+    font-size: 25px;
+    font-weight: 400;
+  }
+}
+// End of jumbotron
+
+.tombol-primary {
+  background-color: #00008C;
+  border: 1px solid #00008C;
+}
+.tombol {
+  border: 1px solid #00008C;
+}
+
+// Animation
+.h-scale {
+  transition: .3s transform cubic-bezier(.155,1.105,.295,1.12),.3s box-shadow,.3s -webkit-transform cubic-bezier(.155,1.105,.295,1.12);
+}
+.h-scale:hover{
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
+}
+
+.animate__dua {
+  --animate-delay: 5s;
+}
+// End of animation
+
+
+// 
+// 
+// 
+// DESKTOP VERSION
+// DESKTOP VERSION
+// DESKTOP VERSION
+// 
+// 
+// 
+@media (min-width: 992px) {
+
+  // D_Navbar
+  .navbar-brand {
+    color: white !important;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.7);
+  }
+
+  .nav-link {
+    text-transform: uppercase;
+  }
+
+  .tombol {
+    text-transform: uppercase;
+    border-radius: 40px;
+    color: white !important;
+  }
+  // End of D_Navbar
+
+  // D_Jumbotron
+  .jumbotron {
+    margin-top: -75px;
+    height: 420px;
+
+    form {
+      input {
+        width: 500px !important;
+        height: 45px;
+      }
+      button {
+        width: 45px;
+        height: 45px;
+      }
+    }
+
+    .display-4 {
+      font-size: 80px;
+    }
+    .lead {
+      font-size: 35px;
+    }
+  }
+  // End of D_Jumbotron
+
+  // D_Container
+  .favorit {
+    h2 {
+      font-size: 30px;
+      font-weight: 400;
+      span {
+        font-weight: 500;
+      }
+    }
+    h5 {
+      font-size: 20px;
+    }
+  }
+  // End of D_Container
+
+  // D_Daftar
+  .daftar {
+    .filter-col {
+      display: block;
+    }
+    h2 {
+      font-size: 28px;
+    }
+    h3 {
+      font-size: 24px;
+    }
+    img {
+      width: 120px;
+      height: 120px;
+    }
+    .ratings {
+      i {
+        font-size: 14px;
+      }
+      .product-rating {
+        font-size: 16px;
+      }
+      .pengulas {
+        font-size: 14px;
+      }
+      .alamat {
+        font-size: 14px;
+        margin-top: 5px;
+      }
+    }
+  }
+  // End of D_Daftar
+
+  // D_Footer
+  footer {
+    .copyright {
+      font-size: 16px;
+    }
+  }
+  // End of D_Footer
+
+}

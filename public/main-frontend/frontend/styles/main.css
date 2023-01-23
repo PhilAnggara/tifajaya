@@ -1,0 +1,128 @@
+body {
+  background-color: #000;
+  background-image: url("../../../frontend/images/jumbotron-bg.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.navbar-brand {
+  font-family: "Viga", sans-serif;
+  font-size: 32px;
+}
+
+.jumbotron {
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
+  text-align: center;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+}
+.jumbotron form input {
+  width: 250px !important;
+}
+.jumbotron .display-4 {
+  font-family: "Viga", sans-serif;
+  color: white;
+  margin-top: 30px;
+  font-size: 60px;
+}
+.jumbotron .lead {
+  font-family: "Assistant", sans-serif;
+  color: white;
+  margin-top: 10px;
+  font-size: 25px;
+  font-weight: 400;
+}
+
+.tombol-primary {
+  background-color: #00008C;
+  border: 1px solid #00008C;
+}
+
+.tombol {
+  border: 1px solid #00008C;
+}
+
+.h-scale {
+  transition: 0.3s transform cubic-bezier(0.155, 1.105, 0.295, 1.12), 0.3s box-shadow;
+}
+
+.h-scale:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12), 0 4px 8px rgba(0, 0, 0, 0.06);
+}
+
+.animate__dua {
+  --animate-delay: 5s;
+}
+
+@media (min-width: 992px) {
+  .navbar-brand {
+    color: white !important;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.7);
+  }
+  .nav-link {
+    text-transform: uppercase;
+  }
+  .tombol {
+    text-transform: uppercase;
+    border-radius: 40px;
+    color: white !important;
+  }
+  .jumbotron {
+    margin-top: -75px;
+    height: 420px;
+  }
+  .jumbotron form input {
+    width: 500px !important;
+    height: 45px;
+  }
+  .jumbotron form button {
+    width: 45px;
+    height: 45px;
+  }
+  .jumbotron .display-4 {
+    font-size: 80px;
+  }
+  .jumbotron .lead {
+    font-size: 35px;
+  }
+  .favorit h2 {
+    font-size: 30px;
+    font-weight: 400;
+  }
+  .favorit h2 span {
+    font-weight: 500;
+  }
+  .favorit h5 {
+    font-size: 20px;
+  }
+  .daftar .filter-col {
+    display: block;
+  }
+  .daftar h2 {
+    font-size: 28px;
+  }
+  .daftar h3 {
+    font-size: 24px;
+  }
+  .daftar img {
+    width: 120px;
+    height: 120px;
+  }
+  .daftar .ratings i {
+    font-size: 14px;
+  }
+  .daftar .ratings .product-rating {
+    font-size: 16px;
+  }
+  .daftar .ratings .pengulas {
+    font-size: 14px;
+  }
+  .daftar .ratings .alamat {
+    font-size: 14px;
+    margin-top: 5px;
+  }
+  footer .copyright {
+    font-size: 16px;
+  }
+}/*# sourceMappingURL=main.css.map */
