@@ -1,44 +1,50 @@
-@extends('layouts.main')
-@section('title', 'Tifajaya')
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Tifajaya</title>
 
-@section('content')
-	<!-- Navbar -->
+  @inject('carbon', 'Carbon\Carbon')
+  @include('includes.style')
+  <link rel="stylesheet" href="{{ url('frontend/styles/home.css') }}">
+  @livewireStyles
+
+</head>
+<body>
+  
   <nav class="navbar navbar-expand-lg navbar-light">
     <div class="container">
-      <a class="navbar-brand" href="">Tifajaya</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <a data-aos="fade-down" class="navbar-brand" href="{{ route('index') }}">Tifajaya</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav ml-auto">
-          <a class="nav-item nav-link btn btn-outline-primary tombol mr-2 px-3 mt-2" href="{{ route('beranda') }}">Admin</a>
+        <div class="navbar-nav ms-auto">
+          <a data-aos="fade-down" class="nav-link btn btn-outline-primary px-3 my-btn" href="{{ route('beranda') }}">ADMIN</a>
         </div>
       </div>
     </div>
   </nav>
-  <!-- End of navbar -->
 
-  <!-- Jumbotron -->
-  <div class="jumbotron jumbotron-fluid">
-    <div class="container">
-      <h1 class="display-4 ztext animate__animated animate__slideInDown animate__fast">Tifajaya</h1>
-      <p class="lead animate__animated animate__fadeInUp animate__dua">Kementerian Pekerjaan Umum dan Perumahan Rakyat Direktorat Jendral Bina Marga</p>
-      <div class="row justify-content-center animate__animated animate__fadeInUp">
-        <form class="form-inline" action="pencarian.html">
-          <input class="form-control" type="search" placeholder="Masukan Nomor Token" aria-label="Search" autofocus>
-          <button class="btn btn-primary tombol-primary my-2 my-sm-0" type="submit">
-            <i class="fas fa-search"></i>
-          </button>
-        </form>
-      </div>    
+  <div class="container text-center content">
+    <h1 data-aos="zoom-in" class="display-4">Tifajaya</h1>
+    <p data-aos="zoom-in" data-aos-delay="150" class="lead">
+      Kementerian Pekerjaan Umum dan Perumahan Rakyat Direktorat Jendral Bina Marga Balai Pelaksanaan Jalan Nasional Jayapura - Laboratorium Pengujian
+    </p>
+    <div data-aos="zoom-in" data-aos-delay="300" class="input-group mb-3 mx-auto">
+      <input type="text" class="form-control" placeholder="Masukan Nomor Token" autofocus>
+      <button class="btn btn-primary my-btn-primary" type="button">
+        <i class="far fa-print-magnifying-glass"></i>
+      </button>
     </div>
   </div>
-  <!-- End of jumbotron -->
-@endsection
 
 
-@push('addon-style')
-@endpush
+  @include('includes.script')
+  @include('sweetalert::alert')
+  @livewireScripts
 
-@push('addon-script')
-@endpush
+</body>
+</html>

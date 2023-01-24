@@ -1,0 +1,47 @@
+body {
+  background-image: linear-gradient(to bottom, rgba(0,0,0,.5), rgba(0,0,0,0)), url("../images/jumbotron-bg.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.navbar-brand {
+  font-family: 'Nobile', sans-serif;
+  font-weight: 500;
+  color: white !important;
+  font-size: 32px !important;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.7);
+}
+
+.my-btn {
+  border: 1px solid #00008C;
+  border-radius: 40px;
+  color: white !important;
+  font-size: 16px;
+}
+.my-btn-primary {
+  background-color: #00008C;
+  border: 1px solid #00008C;
+}
+
+.content {
+  margin-top: 60px;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+  .display-4 {
+    font-family: 'Nobile', sans-serif;
+    font-weight: 500;
+    color: white;
+    font-size: 70px;
+    margin-top: 30px;
+  }
+  .lead {
+    font-family: 'Assistant', sans-serif;
+    color: white;
+    font-size: 30px;
+    margin-top: 10px;
+    font-weight: 400;
+  }
+  .input-group {
+    width: 450px !important;
+  }
+}
