@@ -59,9 +59,13 @@
                       <button type="button" class="btn icon btn-primary">
                         <i class="fal fa-edit" data-toggle="tooltip" title="Ubah"></i>
                       </button>
-                      <button type="button" class="btn icon btn-danger">
+                      <button type="button" class="btn icon btn-danger" onclick="hapusData({{ $item->id }}, 'Hapus Perusahaan', 'Yakin ingin menghapus {{ $item->nama_perusahaan }}?')">
                         <i class="fal fa-trash-alt" data-toggle="tooltip" title="Hapus"></i>
                       </button>
+                      <form action="{{ route('perusahaan.destroy', $item->id) }}" id="hapus-{{ $item->id }}" method="POST">
+                        @method('delete')
+                        @csrf
+                      </form>
                     </div>
                   </td>
                 </tr>

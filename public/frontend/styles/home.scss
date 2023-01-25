@@ -24,7 +24,7 @@ body {
   border: 1px solid #00008C;
 }
 
-.content {
+.jumbotron {
   margin-top: 60px;
   text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
   .display-4 {
@@ -41,7 +41,13 @@ body {
     margin-top: 10px;
     font-weight: 400;
   }
-  .input-group {
-    width: 450px !important;
-  }
+}
+
+
+.input-group {
+  width: 450px !important;
+}
+
+.fix-h {
+  height: 200px;
 }

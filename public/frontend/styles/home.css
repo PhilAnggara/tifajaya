@@ -25,24 +25,29 @@ body {
   border: 1px solid #00008C;
 }
 
-.content {
+.jumbotron {
   margin-top: 60px;
   text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
 }
-.content .display-4 {
+.jumbotron .display-4 {
   font-family: "Nobile", sans-serif;
   font-weight: 500;
   color: white;
   font-size: 70px;
   margin-top: 30px;
 }
-.content .lead {
+.jumbotron .lead {
   font-family: "Assistant", sans-serif;
   color: white;
   font-size: 30px;
   margin-top: 10px;
   font-weight: 400;
 }
-.content .input-group {
+
+.input-group {
   width: 450px !important;
+}
+
+.fix-h {
+  height: 200px;
 }/*# sourceMappingURL=home.css.map */

@@ -40,6 +40,10 @@ class PerusahaanController extends Controller
 
     public function destroy($id)
     {
-        //
+        $item = Perusahaan::find($id);
+        $title = $item->nama_perusahaan;
+        $item->delete();
+
+        return redirect()->back()->with('success', $title.' dihapus!');
     }
 }
