@@ -17,10 +17,10 @@
 </head>
 <body>
   
-  <nav class="navbar navbar-expand-lg navbar-light">
+  <nav class="navbar navbar-expand-lg navbar-light ">
     <div class="container">
       <a data-aos="fade-down" class="navbar-brand" href="{{ route('index') }}">
-        <img src="{{ url('frontend/images/navbar-brand.png') }}" alt="" width="30" height="30" class="d-inline-block align-text-top">
+        <img src="{{ url('frontend/images/navbar-brand.png') }}" class="d-inline-block align-text-top brand">
         Tifajaya
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -37,7 +37,7 @@
   <div class="jumbotron text-center">
     {{-- <h1 class="display-4">Tifajaya</h1> --}}
     <h1 class="display-4"><span id="typed"></span></h1>
-    <p class="lead">
+    <p class="lead" data-aos="flip-up">
       Kementerian Pekerjaan Umum dan Perumahan Rakyat Direktorat Jendral Bina Marga Balai Pelaksanaan Jalan Nasional Jayapura - Laboratorium Pengujian
     </p>
   </div>
@@ -49,6 +49,21 @@
   </div>
 
 
+  <script>
+    var typed = new Typed('#typed', {
+      strings: [
+        'Tifajaya',
+        'Kementerian <strong>PUPR</strong>'
+      ],
+      // startDelay: 200,
+      typeSpeed: 15,
+      backSpeed: 15,
+      backDelay: 3000,
+      loop: true,
+      // loopCount: Infinity,
+    });
+  </script>
+  
   @include('includes.script')
   @include('sweetalert::alert')
   @livewireScripts
@@ -60,18 +75,6 @@
         event.preventDefault();
         document.getElementById('searchToken').click();
       }
-    });
-
-    var typed = new Typed('#typed', {
-      strings: [
-        'Tifajaya',
-        'Kementerian <strong>PUPR</strong>'
-      ],
-      typeSpeed: 15,
-      backSpeed: 15,
-      backDelay: 3000,
-      loop: true,
-      // loopCount: Infinity,
     });
   </script>
 

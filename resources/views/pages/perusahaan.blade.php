@@ -14,7 +14,7 @@
   <section class="section mt-4">
     <div data-aos="zoom-in" class="card">
       <div class="card-header d-flex justify-content-end">
-        <button class="btn icon icon-left btn-success" data-bs-toggle="modal" data-bs-target="#tambahDataModal">
+        <button class="btn icon icon-left btn-success" data-bs-toggle="modal" data-bs-target="#tambah">
           <i class="fal fa-plus"></i>
           Tambah
         </button>
@@ -53,10 +53,10 @@
                   </td>
                   <td>
                     <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-                      <button type="button" class="btn icon btn-info">
+                      <button type="button" class="btn icon btn-info" data-bs-toggle="modal" data-bs-target="#detail-{{ $item->id }}">
                         <i class="fal fa-eye" data-toggle="tooltip" title="Lihat Detail"></i>
                       </button>
-                      <button type="button" class="btn icon btn-primary">
+                      <button type="button" class="btn icon btn-primary" data-bs-toggle="modal" data-bs-target="#edit-{{ $item->id }}">
                         <i class="fal fa-edit" data-toggle="tooltip" title="Ubah"></i>
                       </button>
                       <button type="button" class="btn icon btn-danger" onclick="hapusData({{ $item->id }}, 'Hapus Perusahaan', 'Yakin ingin menghapus {{ $item->nama_perusahaan }}?')">
@@ -78,6 +78,7 @@
 
   </section>
 </div>
+@include('includes.modals.modal-perusahaan')
 @endsection
 
 

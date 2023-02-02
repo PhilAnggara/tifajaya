@@ -20,13 +20,16 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [MainController::class, 'index'])->name('index');
 Route::prefix('admin')->middleware(['auth', 'role:Admin,Kepala Seksi,Kepala Lab'])->group(function () {
     Route::get('/', [MainController::class, 'beranda'])->name('beranda');
+    // Route::resource('perusahaan', PerusahaanController::class)->middleware('role:Admin,Kepala Seksi');
     Route::resource('perusahaan', PerusahaanController::class);
 
     
-    Route::get('pengujiaan', [MainController::class, 'pengujiaan'])->name('pengujiaan');
     Route::get('surat-perintah-pengujian', [MainController::class, 'suratPerintah'])->name('surat-perintah-pengujian');
-    Route::get('surat-pengantar-pengujian', [MainController::class, 'suratPengantar'])->name('surat-pengantar-pengujian');
+    // Route::get('pengujiaan', [MainController::class, 'pengujiaan'])->name('pengujiaan')->middleware('role:Kepala Seksi,Kepala Lab');
+    Route::get('pengujiaan', [MainController::class, 'pengujiaan'])->name('pengujiaan');
     Route::get('laporan-pengujian', [MainController::class, 'laporanPengujian'])->name('laporan-pengujian');
+    Route::get('surat-pengantar-pengujian', [MainController::class, 'suratPengantar'])->name('surat-pengantar-pengujian');
+    // Route::resource('kelola-pengguna', UserController::class)->middleware('role:Kepala Seksi');
     Route::resource('kelola-pengguna', UserController::class);
 });
 

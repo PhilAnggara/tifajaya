@@ -28,6 +28,13 @@
           </li>
         {{-- @endif --}}
 
+        <li class="sidebar-item {{ Request::is('admin/surat-perintah-pengujian') ? 'active' : '' }}">
+          <a href="{{ route('surat-perintah-pengujian') }}" class='sidebar-link'>
+            <i class="far fa-memo-circle-check"></i>
+            <span>Surat Perintah Pengujian</span>
+          </a>
+        </li>
+
         {{-- @if (auth()->user()->role == 'Kepala Seksi' || auth()->user()->role == 'Kepala Lab') --}}
           <li class="sidebar-item {{ Request::is('admin/pengujiaan') ? 'active' : '' }}">
             <a href="{{ route('pengujiaan') }}" class='sidebar-link'>
@@ -37,10 +44,10 @@
           </li>
         {{-- @endif --}}
 
-        <li class="sidebar-item {{ Request::is('admin/surat-perintah-pengujian') ? 'active' : '' }}">
-          <a href="{{ route('surat-perintah-pengujian') }}" class='sidebar-link'>
-            <i class="far fa-memo-circle-check"></i>
-            <span>Surat Perintah Pengujian</span>
+        <li class="sidebar-item {{ Request::is('admin/laporan-pengujian') ? 'active' : '' }}">
+          <a href="{{ route('laporan-pengujian') }}" class='sidebar-link'>
+            <i class="far fa-file-chart-column"></i>
+            <span>Laporan Pengujian</span>
           </a>
         </li>
 
@@ -48,13 +55,6 @@
           <a href="{{ route('surat-pengantar-pengujian') }}" class='sidebar-link'>
             <i class="far fa-memo"></i>
             <span>Surat Pengantar Pengujain</span>
-          </a>
-        </li>
-
-        <li class="sidebar-item {{ Request::is('admin/laporan-pengujian') ? 'active' : '' }}">
-          <a href="{{ route('laporan-pengujian') }}" class='sidebar-link'>
-            <i class="far fa-file-chart-column"></i>
-            <span>Laporan Pengujian</span>
           </a>
         </li>
 

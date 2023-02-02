@@ -5,17 +5,21 @@ body {
   background-attachment: fixed;
 }
 
+
+.brand {
+  width: 20px;
+  height: 20px;
+}
+
 .navbar-brand {
   font-family: 'Nobile', sans-serif;
   font-weight: 500;
   color: white !important;
-  font-size: 32px !important;
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.7);
 }
 
 .my-btn {
   border: 1px solid #00008C;
-  border-radius: 40px;
   color: white !important;
   font-size: 16px;
 }
@@ -31,23 +35,54 @@ body {
     font-family: 'Nobile', sans-serif;
     font-weight: 500;
     color: white;
-    font-size: 70px;
     margin-top: 30px;
   }
   .lead {
     font-family: 'Assistant', sans-serif;
     color: white;
-    font-size: 30px;
     margin-top: 10px;
     font-weight: 400;
   }
 }
 
-
-.input-group {
-  width: 450px !important;
-}
-
 .fix-h {
   height: 200px;
+}
+
+// Desktop Only
+@media (min-width: 992px) {
+
+  .brand {
+    width: 30px;
+    height: 30px;
+  }
+  .navbar-brand {
+    font-size: 32px !important;
+  }
+
+  .jumbotron {
+    .display-4 {
+      font-size: 70px;
+    }
+    .lead {
+      font-size: 30px;
+    }
+  }
+  
+  .my-btn {
+    border-radius: 40px;
+  }
+  .input-group {
+    width: 450px !important;
+  }
+
+}
+
+// Mobile Only
+@media (max-width: 992px) {
+  
+  .my-btn {
+    background-color: #00008C;
+  }
+  
 }

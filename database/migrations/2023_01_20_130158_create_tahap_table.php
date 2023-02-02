@@ -6,30 +6,30 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
-    public function up()
-    {
-        Schema::create('tahap', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('id_pengujian');
-            $table->string('nama');
-            $table->string('waktu');
-            $table->timestamps();
-            $table->softDeletes();
-        });
-    }
+    // /**
+    //  * Run the migrations.
+    //  *
+    //  * @return void
+    //  */
+    // public function up()
+    // {
+    //     Schema::create('tahap', function (Blueprint $table) {
+    //         $table->id();
+    //         $table->foreignId('id_pengujian');
+    //         $table->string('nama');
+    //         $table->string('waktu');
+    //         $table->timestamps();
+    //         $table->softDeletes();
+    //     });
+    // }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
-        Schema::dropIfExists('tahap');
-    }
+    // /**
+    //  * Reverse the migrations.
+    //  *
+    //  * @return void
+    //  */
+    // public function down()
+    // {
+    //     Schema::dropIfExists('tahap');
+    // }
 };
