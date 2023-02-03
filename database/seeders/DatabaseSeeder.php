@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
             PengujianSeeder::class,
             DetailPengujianSeeder::class,
             ItemPengujianSeeder::class,
+            UpdateSeeder::class,
         ]);
     }
 }

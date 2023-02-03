@@ -20,4 +20,9 @@ class JenisPengujian extends Model
     protected $hidden = [
 
     ];
+
+    public function tahapan()
+    {
+        return $this->hasMany(TahapanPengujian::class, 'id_jenis_pengujian', 'id');
+    }
 }

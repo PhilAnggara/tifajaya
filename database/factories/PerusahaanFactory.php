@@ -28,18 +28,19 @@ class PerusahaanFactory extends Factory
             'alamat' => fake()->address(),
             'no_sp' => fake()->regexify('[0-9]{3}/[A-Z]{4}/[A-Z]{2}-[A-Z]{3}-[A-Z]{4}-[A-Z]{4}/III/2022'),
             'telp' => '08'. fake()->randomElement([22, 51, 23, 52]) .fake()->randomNumber(8, true),
+            'no_kontrak' => fake()->regexify('[0-9]{3}/[A-Z]{4}/[A-Z]{2}-[A-Z]{3}-[A-Z]{4}-[A-Z]{4}/III/2022'),
             'tgl_sp' => Carbon::parse(Carbon::now()),
             'tgl_daftar' => Carbon::parse(Carbon::now()),
             'satuan_kerja' => fake()->randomElement([
                 'PPK 1.2 Provinisi Jayapura',
-                'PELAKSANA LAPANGAN ',
+                'Pelaksana Lapangan ',
                 'PPK 1.2 Provinisi Jayapura',
             ]),
             'token' => fake()->randomElement([
                 'BTON',
                 'ASPL',
                 'AGRT',
-            ]).fake()->randomNumber(9, true),
+            ]).'-'.date('ymd').'-'.fake()->randomNumber(4, true),
         ];
     }
 }

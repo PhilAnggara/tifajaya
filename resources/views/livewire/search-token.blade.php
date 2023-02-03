@@ -1,4 +1,5 @@
 <div>
+  @inject('carbon', 'Carbon\Carbon')
 
   <div class="row justify-content-center">
 
@@ -35,7 +36,7 @@
             </h5>
             <p class="card-text">Pengujian Beton</p>
             <div class="progress progress-primary mb-4">
-              <div class="progress-bar progress-label" role="progressbar" style="width: 35%"  aria-valuenow="35" aria-valuemin="0" aria-valuemax="100"></div>
+              <div class="progress-bar progress-label" role="progressbar" style="width: {{ $item->persentase() }}%"  aria-valuenow="{{ $item->persentase() }}" aria-valuemin="0" aria-valuemax="100"></div>
             </div>
             <div class="table-responsive">
               <table class='table table-hover border text-center table-striped text-nowrap' id="myTable">
@@ -47,47 +48,45 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>Properties Material URBIS - URPIL, KLS A,B,S</td>
-                    <td class="text-start">
-                      <i class="far fa-calendar-day text-info"></i>
-                      18 Maret 2022
-                       - 
-                       <i class="far fa-calendar-day text-dark"></i>
-                       27 Maret 2022
-                    </td>
-                    <td>
-                      <span class="badge bg-success">
-                        <i class="fal fa-circle-check"></i>
-                        Berhasil
-                      </span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Properties Material CTB-CTSB</td>
-                    <td class="text-start">
-                      <i class="far fa-calendar-day text-info"></i>
-                      18 Maret 2022
-                    </td>
-                    <td>
-                      <span class="badge bg-primary">
-                        <i class="fal fa-spinner"></i>
-                        Sedang Berjalan
-                      </span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Properties Material SOIL - Alam Lokal</td>
-                    <td class="text-start">
-                      
-                    </td>
-                    <td>
-                      <span class="badge bg-light">
-                        <i class="fal fa-circle-minus"></i>
-                        Belum Dikerjakan
-                      </span>
-                    </td>
-                  </tr>
+                  @foreach ($item->pengujian as $pengujian)
+                    <tr>
+                      <td>{{ $pengujian->tahap->tahapan }}</td>
+                      <td class="text-start">
+                        @if ($pengujian->mulai)
+                          <i class="far fa-calendar-day text-info"></i>
+                          {{ $carbon::parse($pengujian->mulai)->isoFormat('D MMMM YYYY') }}
+                          - 
+                        @endif
+                        @if ($pengujian->selesai)
+                          <i class="far fa-calendar-day text-dark"></i>
+                          {{ $carbon::parse($pengujian->selesai)->isoFormat('D MMMM YYYY') }}
+                        @endif
+                      </td>
+                      <td>
+                        @if ($pengujian->status == 0)
+                          <span class="badge bg-light">
+                            <i class="fal fa-circle-minus"></i>
+                            Belum Dikerjakan
+                          </span>
+                        @elseif ($pengujian->status == 1)
+                          <span class="badge bg-primary">
+                            <i class="fal fa-spinner"></i>
+                            Sedang Berjalan
+                          </span>
+                        @elseif ($pengujian->status == 2)
+                          <span class="badge bg-success">
+                            <i class="fal fa-circle-check"></i>
+                            Berhasil
+                          </span>
+                        @else
+                          <span class="badge bg-danger">
+                            <i class="fal fa-circle-xmark"></i>
+                            Gagal
+                          </span>
+                        @endif
+                      </td>
+                    </tr>
+                  @endforeach
                 </tbody>
               </table>
             </div>

@@ -16,9 +16,10 @@ return new class extends Migration
         Schema::create('pengujian', function (Blueprint $table) {
             $table->id();
             $table->foreignId('id_perusahaan');
-            $table->date('mulai');
-            $table->date('selesai');
-            $table->integer('status');
+            $table->foreignId('id_tahapan_pengujian');
+            $table->date('mulai')->nullable();
+            $table->date('selesai')->nullable();
+            $table->integer('status')->default(0);
             $table->timestamps();
             $table->softDeletes();
         });

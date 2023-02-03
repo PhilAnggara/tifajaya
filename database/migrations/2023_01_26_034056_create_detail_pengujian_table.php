@@ -20,7 +20,6 @@ return new class extends Migration
             $table->integer('total_harga');
             $table->string('no_surat');
             $table->string('no_material');
-            $table->string('no_kontrak');
             $table->timestamps();
             $table->softDeletes();
         });

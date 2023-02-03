@@ -22,8 +22,9 @@ return new class extends Migration
             $table->string('jabatan_pjsatu');
             $table->string('paket');
             $table->string('alamat');
-            $table->string('no_sp');
             $table->string('telp');
+            $table->string('no_kontrak');
+            $table->string('no_sp');
             $table->date('tgl_sp');
             $table->date('tgl_daftar');
             $table->string('satuan_kerja');

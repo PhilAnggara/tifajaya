@@ -46,7 +46,7 @@
                     {{ $carbon::parse($item->tgl_daftar)->isoFormat('D MMMM YYYY') }}
                   </td>
                   <td>
-                    <span class="badge bg-light rounded">
+                    <span class="badge bg-light rounded"  onclick="copyToClipboard('{{ $item->telp }}')">
                       <i class="fal fa-phone"></i>
                       {{ $item->telp }}
                     </span>

@@ -20,4 +20,14 @@ class Pengujian extends Model
     protected $hidden = [
 
     ];
+
+    public function perusahaan()
+    {
+        return $this->belongsTo(Perusahaan::class, 'id_perusahaan', 'id');
+    }
+
+    public function tahap()
+    {
+        return $this->belongsTo(TahapanPengujian::class, 'id_tahapan_pengujian', 'id');
+    }
 }
