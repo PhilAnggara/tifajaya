@@ -269,7 +269,7 @@
           <p class="text-muted fw-bold text-center">Progress</p>
 
           <div class="progress progress-primary mb-4">
-            <div class="progress-bar progress-label" role="progressbar" style="width: {{ $item->persentase() }}%"  aria-valuenow="{{ $item->persentase() }}" aria-valuemin="0" aria-valuemax="100"></div>
+            <div class="progress-bar progress-label" role="progressbar" style="width: {{ $item->progress() }}%"  aria-valuenow="{{ $item->progress() }}" aria-valuemin="0" aria-valuemax="100"></div>
           </div>
           <div class="table-responsive">
             <table class='table table-hover border text-center table-striped text-nowrap'>

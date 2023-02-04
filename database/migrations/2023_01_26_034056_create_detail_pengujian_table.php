@@ -20,6 +20,9 @@ return new class extends Migration
             $table->integer('total_harga');
             $table->string('no_surat');
             $table->string('no_material');
+            $table->text('surat_perintah')->nullable();
+            $table->text('laporan')->nullable();
+            $table->text('surat_pengantar')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

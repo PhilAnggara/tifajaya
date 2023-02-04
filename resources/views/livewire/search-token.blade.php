@@ -36,7 +36,7 @@
             </h5>
             <p class="card-text">Pengujian Beton</p>
             <div class="progress progress-primary mb-4">
-              <div class="progress-bar progress-label" role="progressbar" style="width: {{ $item->persentase() }}%"  aria-valuenow="{{ $item->persentase() }}" aria-valuemin="0" aria-valuemax="100"></div>
+              <div class="progress-bar progress-label" role="progressbar" style="width: {{ $item->progress() }}%"  aria-valuenow="{{ $item->progress() }}" aria-valuemin="0" aria-valuemax="100"></div>
             </div>
             <div class="table-responsive">
               <table class='table table-hover border text-center table-striped text-nowrap' id="myTable">
@@ -90,6 +90,14 @@
                 </tbody>
               </table>
             </div>
+            @if ($item->progress() == 100)
+              <div class="text-center">
+                <a href="{{ Storage::url('files/sample-1.pdf') }}" target="_blank" class="btn btn-sm icon icon-left btn-primary">
+                  <i class="fal fa-file-arrow-down"></i>
+                  Donwload Laporan
+                </a>
+              </div>
+            @endif
           </div>
         </div>
       </div>

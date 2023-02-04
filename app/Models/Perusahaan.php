@@ -22,18 +22,23 @@ class Perusahaan extends Model
 
     ];
 
-    public function jenisPengujian()
-    {
-        return JenisPengujian::where('prefix', Str::substr($this->token, 0, 4))->first();
-        
-    }
 
     public function pengujian()
     {
         return $this->hasMany(Pengujian::class, 'id_perusahaan', 'id');
     }
 
-    public function persentase()
+    public function detail()
+    {
+        return $this->hasOne(DetailPengujian::class, 'id_perusahaan', 'id');
+    }
+
+    public function jenisPengujian()
+    {
+        return JenisPengujian::where('prefix', Str::substr($this->token, 0, 4))->first();
+    }
+
+    public function progress()
     {
         $total = $this->pengujian->count();
         $selesai = $this->pengujian->where('status', 2)->count();

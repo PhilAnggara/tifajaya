@@ -27,6 +27,7 @@ class PerusahaanController extends Controller
         $item = Perusahaan::create($request->all());
 
         MyFunction::createPengujian($item);
+        MyFunction::createDetail($item);
 
         return redirect()->back()->with('success', $request->nama_perusahaan.' berhasil ditambahkan!');
     }

@@ -25,4 +25,9 @@ class JenisPengujian extends Model
     {
         return $this->hasMany(TahapanPengujian::class, 'id_jenis_pengujian', 'id');
     }
+
+    public function itemPengujian()
+    {
+        return $this->hasMany(ItemPengujian::class, 'id_jenis_pengujian', 'id');
+    }
 }

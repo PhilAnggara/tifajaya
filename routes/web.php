@@ -25,6 +25,7 @@ Route::prefix('admin')->middleware(['auth', 'role:Admin,Kepala Seksi,Kepala Lab'
 
     
     Route::get('surat-perintah-pengujian', [MainController::class, 'suratPerintah'])->name('surat-perintah-pengujian');
+    Route::put('upload/{id}', [MainController::class, 'upload'])->name('upload');
     // Route::get('pengujiaan', [MainController::class, 'pengujiaan'])->name('pengujiaan')->middleware('role:Kepala Seksi,Kepala Lab');
     Route::get('pengujiaan', [MainController::class, 'pengujiaan'])->name('pengujiaan');
     Route::get('laporan-pengujian', [MainController::class, 'laporanPengujian'])->name('laporan-pengujian');
@@ -32,19 +33,5 @@ Route::prefix('admin')->middleware(['auth', 'role:Admin,Kepala Seksi,Kepala Lab'
     // Route::resource('kelola-pengguna', UserController::class)->middleware('role:Kepala Seksi');
     Route::resource('kelola-pengguna', UserController::class);
 });
-
-// Route::get('test', function () {
-//     return view('pages.home1');
-// });
-
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
-
-// Route::middleware('auth')->group(function () {
-//     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-//     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-//     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-// });
 
 require __DIR__.'/auth.php';

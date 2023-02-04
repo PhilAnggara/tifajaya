@@ -20,8 +20,8 @@ class DatabaseSeeder extends Seeder
             JenisPengujianSeeder::class,
             TahapanPengujianSeeder::class,
             PengujianSeeder::class,
-            DetailPengujianSeeder::class,
             ItemPengujianSeeder::class,
+            DetailPengujianSeeder::class,
             UpdateSeeder::class,
         ]);
     }

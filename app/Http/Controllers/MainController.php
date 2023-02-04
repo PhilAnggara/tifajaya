@@ -38,4 +38,26 @@ class MainController extends Controller
         $items = Perusahaan::all()->sortDesc();
         return view('pages.laporan-pengujian', compact('items'));
     }
+
+    public function upload(Request $request, $id)
+    {
+        $item = Perusahaan::find($id);
+
+        if ($request->type == 'Surat Perintah Pengujian') {
+            $data = [
+                'surat_perintah' => $request->file('document')->storeAs('files/surat-perintah-pengujian', $item->token.'.pdf' ,'public')
+            ];
+        } elseif ($request->type == 'Surat Pengantar Pengujian') {
+            $data = [
+                'surat_pengantar' => $request->file('document')->storeAs('files/surat-pengantar-pengujian', $item->token.'.pdf' ,'public')
+            ];
+        } elseif ($request->type == 'Laporan Pengujian') {
+            $data = [
+                'laporan' => $request->file('document')->storeAs('files/laporan-pengujian', $item->token.'.pdf' ,'public')
+            ];
+        }
+        $item->detail->update($data);
+        
+        return redirect()->back()->with('success', $request->type.' berhasil diunggah!');
+    }
 }
