@@ -23,6 +23,9 @@ return new class extends Migration
             $table->text('surat_perintah')->nullable();
             $table->text('laporan')->nullable();
             $table->text('surat_pengantar')->nullable();
+            $table->integer('surat_perintah_download')->default(0);
+            $table->integer('laporan_download')->default(0);
+            $table->integer('surat_pengantar_download')->default(0);
             $table->timestamps();
             $table->softDeletes();
         });

@@ -32,6 +32,8 @@ Route::prefix('admin')->middleware(['auth', 'role:Admin,Kepala Seksi,Kepala Lab'
     Route::get('surat-pengantar-pengujian', [MainController::class, 'suratPengantar'])->name('surat-pengantar-pengujian');
     // Route::resource('kelola-pengguna', UserController::class)->middleware('role:Kepala Seksi');
     Route::resource('kelola-pengguna', UserController::class);
+
+    Route::get('print-pdf/{type}/{id}', [MainController::class, 'printPDF'])->name('print-pdf');
 });
 
 require __DIR__.'/auth.php';

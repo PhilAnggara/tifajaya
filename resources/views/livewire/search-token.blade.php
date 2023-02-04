@@ -35,7 +35,7 @@
               <small class="text-muted">( {{ $item->token }} )</small>
             </h5>
             <p class="card-text">Pengujian Beton</p>
-            <div class="progress progress-primary mb-4">
+            <div class="progress progress-{{ $item->progress() == 100 ? 'primary' : 'info' }} mb-4">
               <div class="progress-bar progress-label" role="progressbar" style="width: {{ $item->progress() }}%"  aria-valuenow="{{ $item->progress() }}" aria-valuemin="0" aria-valuemax="100"></div>
             </div>
             <div class="table-responsive">

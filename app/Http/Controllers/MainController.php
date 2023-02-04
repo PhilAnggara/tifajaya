@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Perusahaan;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 
 class MainController extends Controller
 {
@@ -45,19 +47,40 @@ class MainController extends Controller
 
         if ($request->type == 'Surat Perintah Pengujian') {
             $data = [
-                'surat_perintah' => $request->file('document')->storeAs('files/surat-perintah-pengujian', $item->token.'.pdf' ,'public')
+                'surat_perintah' => $request->file('document')->storeAs('files/surat-perintah-pengujian', $request->type. ' ('. $item->token.').pdf' ,'public')
             ];
         } elseif ($request->type == 'Surat Pengantar Pengujian') {
             $data = [
-                'surat_pengantar' => $request->file('document')->storeAs('files/surat-pengantar-pengujian', $item->token.'.pdf' ,'public')
+                'surat_pengantar' => $request->file('document')->storeAs('files/surat-pengantar-pengujian', $request->type. ' ('. $item->token.').pdf' ,'public')
             ];
         } elseif ($request->type == 'Laporan Pengujian') {
             $data = [
-                'laporan' => $request->file('document')->storeAs('files/laporan-pengujian', $item->token.'.pdf' ,'public')
+                'laporan' => $request->file('document')->storeAs('files/laporan-pengujian', $request->type. ' ('. $item->token.').pdf' ,'public')
             ];
         }
         $item->detail->update($data);
         
         return redirect()->back()->with('success', $request->type.' berhasil diunggah!');
+    }
+
+    public function printPDF($type, $id)
+    {
+        $pdf = App::make('dompdf.wrapper');
+        $item = Perusahaan::find($id);
+
+        if ($type == 'surat-perintah-pengujian') {
+            $pdf->loadView('pdf.surat-perintah', compact('item'));
+            $item->detail->surat_perintah_download += 1;
+            $item->detail->save();
+        } elseif ($type == 'surat-pengantar-pengujian') {
+            $pdf->loadView('pdf.surat-pengantar', compact('item'));
+            $item->detail->surat_pengantar_download += 1;
+            $item->detail->save();
+        } elseif ($type == 'laporan-pengujian') {
+            $pdf->loadView('pdf.laporan-pengujian', compact('item'));
+            $item->detail->laporan_download += 1;
+            $item->detail->save();
+        }
+        return $pdf->stream(Str::title(Str::replace('-', ' ', $type)). ' ('. $item->token. ').pdf');
     }
 }

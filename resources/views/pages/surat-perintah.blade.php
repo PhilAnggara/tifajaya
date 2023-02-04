@@ -51,11 +51,11 @@
                           <i class="fal fa-print" data-toggle="tooltip" title="Cetak"></i>
                         </a>
                       @else
-                        <a href="{{ Storage::url('files/sample-1.pdf') }}" target="_blank" class="btn icon btn-primary">
+                        <a href="{{ route('print-pdf', ['surat-perintah-pengujian', $item->id]) }}" target="_blank" class="btn icon btn-outline-primary" id="trigger-{{ $item->id }}">
                           <i class="fal fa-print" data-toggle="tooltip" title="Cetak"></i>
                         </a>
                       @endif
-                      <button type="button" class="btn icon btn-info" data-bs-toggle="modal" data-bs-target="#upload-{{ $item->id }}">
+                      <button type="button" class="btn icon {{ $item->detail->surat_perintah_download ? 'btn-info' : 'btn-light' }}" data-bs-toggle="modal" data-bs-target="#upload-{{ $item->id }}" {{ $item->detail->surat_perintah_download ? '' : 'disabled' }} id="target-{{ $item->id }}">
                         <i class="fal fa-arrow-up-from-bracket" data-toggle="tooltip" title="Upload"></i>
                       </button>
                     </div>
@@ -78,4 +78,13 @@
 @endpush
 
 @push('addon-script')
+  @foreach ($items as $item)
+    <script>
+      document.getElementById('trigger-{{ $item->id }}').addEventListener('click', function() {
+        document.getElementById('target-{{ $item->id }}').removeAttribute('disabled');
+        document.getElementById('target-{{ $item->id }}').classList.remove('btn-light');
+        document.getElementById('target-{{ $item->id }}').classList.add('btn-info');
+      });
+    </script>
+  @endforeach
 @endpush

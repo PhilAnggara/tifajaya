@@ -34,7 +34,12 @@
             <tbody>
               @foreach ($items as $item)
                 <tr>
-                  <td>{{ $item->nama_perusahaan }}</td>
+                  <td>
+                    {{ $item->nama_perusahaan }}
+                    @if ($item->progress() == 100)
+                      <i class="fad fa-circle-check text-success"></i>
+                    @endif
+                  </td>
                   <td>
                     <button class="btn btn-sm icon icon-left btn-outline-secondary" onclick="copyToClipboard('{{ $item->token }}')">
                       <i class="fal fa-clipboard"></i>
