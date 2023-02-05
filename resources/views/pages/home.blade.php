@@ -34,7 +34,7 @@
     </div>
   </nav>
   
-  <div class="jumbotron text-center">
+  <div class="jumbotron text-center container">
     {{-- <h1 class="display-4">Tifajaya</h1> --}}
     <h1 class="display-4"><span id="typed"></span></h1>
     <p class="lead" data-aos="flip-up">

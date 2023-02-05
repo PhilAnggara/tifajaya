@@ -256,7 +256,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#pengujian-{{ $item->id }}">Tutup</button>
-              <button type="submit" class="btn btn-primary ml-1">Mulai</button>
+              <button type="submit" class="btn btn-primary ml-1">Simpan</button>
             </div>
           </form>
         </div>
