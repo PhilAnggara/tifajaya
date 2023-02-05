@@ -70,7 +70,7 @@
 
   </section>
 </div>
-@include('includes.modals.modal-surat-pengantar')
+@include('includes.modals.modal-laporan-pengujian')
 @endsection
 
 

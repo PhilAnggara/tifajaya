@@ -28,6 +28,7 @@ Route::prefix('admin')->middleware(['auth', 'role:Admin,Kepala Seksi,Kepala Lab'
     Route::put('upload/{id}', [MainController::class, 'upload'])->name('upload');
     // Route::get('pengujiaan', [MainController::class, 'pengujiaan'])->name('pengujiaan')->middleware('role:Kepala Seksi,Kepala Lab');
     Route::get('pengujiaan', [MainController::class, 'pengujiaan'])->name('pengujiaan');
+    Route::put('update-pengujiaan/{id}', [MainController::class, 'updatePengujian'])->name('update-pengujiaan');
     Route::get('laporan-pengujian', [MainController::class, 'laporanPengujian'])->name('laporan-pengujian');
     Route::get('surat-pengantar-pengujian', [MainController::class, 'suratPengantar'])->name('surat-pengantar-pengujian');
     // Route::resource('kelola-pengguna', UserController::class)->middleware('role:Kepala Seksi');

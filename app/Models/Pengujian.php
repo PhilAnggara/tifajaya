@@ -30,4 +30,20 @@ class Pengujian extends Model
     {
         return $this->belongsTo(TahapanPengujian::class, 'id_tahapan_pengujian', 'id');
     }
+
+    public function qualifiedToRun()
+    {
+        $item = Perusahaan::find($this->id_perusahaan);
+
+        $result = 0;
+        if ($item->pengujian->first()->id == $this->id) {
+            $result = 1;
+        } else {
+            $entry = Pengujian::find($this->id - 1);
+            if ($entry->status == 2) {
+                $result = 1;
+            }
+        }
+        return $result;
+    }
 }

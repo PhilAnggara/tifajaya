@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pengujian;
 use App\Models\Perusahaan;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -25,6 +26,15 @@ class MainController extends Controller
         $items = Perusahaan::all()->sortDesc();
         return view('pages.pengujian', compact('items'));
     }
+    public function updatePengujian(Request $request, $id)
+    {
+        $item = Pengujian::find($id);
+        $item->update($request->all());
+
+        return redirect()->back()->with('success', 'Data pengujian berhasil disimpan!');
+    }
+
+
     public function suratPerintah()
     {
         $items = Perusahaan::all()->sortDesc();
