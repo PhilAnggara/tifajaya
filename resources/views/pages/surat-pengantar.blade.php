@@ -13,12 +13,6 @@
   </div>
   <section class="section mt-4">
     <div data-aos="zoom-in" class="card">
-      <div class="card-header d-flex justify-content-end">
-        <button class="btn icon icon-left btn-success" data-bs-toggle="modal" data-bs-target="#tambahDataModal">
-          <i class="fal fa-plus"></i>
-          Tambah
-        </button>
-      </div>
       <div class="card-body">
         <div class="table-responsive">
           <table class='table table-hover border text-center table-striped text-nowrap' id="myTable">
@@ -26,8 +20,8 @@
               <tr>
                 <th>Nama Perusahaan</th>
                 <th>No. Token</th>
-                <th>Tanggal</th>
-                <th>No. Telp</th>
+                <th>No. Surat</th>
+                <th>Jenis Pengujian</th>
                 <th></th>
               </tr>
             </thead>
@@ -42,25 +36,27 @@
                     </button>
                   </td>
                   <td>
-                    <i class="fal fa-calendar-day text-danger"></i>
-                    {{ $carbon::parse($item->tgl_daftar)->isoFormat('D MMMM YYYY') }}
+                    <button class="btn btn-sm icon icon-left btn-outline-dark round" onclick="copyToClipboard('{{ $item->detail->no_surat }}')">
+                      <i class="fal fa-clipboard"></i>
+                      {{ $item->detail->no_surat }}
+                    </button>
                   </td>
                   <td>
-                    <span class="badge bg-light rounded">
-                      <i class="fal fa-phone"></i>
-                      {{ $item->telp }}
-                    </span>
+                    <span class="badge bg-light text-uppercase">{{ $item->jenisPengujian()->jenis }}</span>
                   </td>
                   <td>
                     <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-                      <button type="button" class="btn icon btn-info">
-                        <i class="fal fa-eye" data-toggle="tooltip" title="Lihat Detail"></i>
-                      </button>
-                      <button type="button" class="btn icon btn-primary">
-                        <i class="fal fa-edit" data-toggle="tooltip" title="Ubah"></i>
-                      </button>
-                      <button type="button" class="btn icon btn-danger">
-                        <i class="fal fa-trash-alt" data-toggle="tooltip" title="Hapus"></i>
+                      @if ($item->detail->surat_pengantar)
+                        <a href="{{ Storage::url($item->detail->surat_pengantar) }}" target="_blank" class="btn icon btn-primary">
+                          <i class="fal fa-print" data-toggle="tooltip" title="Cetak"></i>
+                        </a>
+                      @else
+                        <a href="{{ route('print-pdf', ['surat-pengantar-pengujian', $item->id]) }}" target="_blank" class="btn icon btn-outline-primary" id="trigger-{{ $item->id }}">
+                          <i class="fal fa-print" data-toggle="tooltip" title="Cetak"></i>
+                        </a>
+                      @endif
+                      <button type="button" class="btn icon {{ $item->detail->surat_pengantar_download ? 'btn-info' : 'btn-light' }}" data-bs-toggle="modal" data-bs-target="#upload-{{ $item->id }}" {{ $item->detail->surat_pengantar_download ? '' : 'disabled' }} id="target-{{ $item->id }}">
+                        <i class="fal fa-arrow-up-from-bracket" data-toggle="tooltip" title="Upload"></i>
                       </button>
                     </div>
                   </td>
@@ -74,6 +70,7 @@
 
   </section>
 </div>
+@include('includes.modals.modal-surat-pengantar')
 @endsection
 
 
@@ -81,4 +78,13 @@
 @endpush
 
 @push('addon-script')
+  @foreach ($items as $item)
+    <script>
+      document.getElementById('trigger-{{ $item->id }}').addEventListener('click', function() {
+        document.getElementById('target-{{ $item->id }}').removeAttribute('disabled');
+        document.getElementById('target-{{ $item->id }}').classList.remove('btn-light');
+        document.getElementById('target-{{ $item->id }}').classList.add('btn-info');
+      });
+    </script>
+  @endforeach
 @endpush
