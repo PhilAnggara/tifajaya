@@ -46,18 +46,29 @@
                   </td>
                   <td>
                     <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-                      @if ($item->detail->laporan)
-                        <a href="{{ Storage::url($item->detail->laporan) }}" target="_blank" class="btn icon btn-primary">
-                          <i class="fal fa-print" data-toggle="tooltip" title="Cetak"></i>
-                        </a>
-                      @else
-                        <a href="{{ route('print-pdf', ['laporan-pengujian', $item->id]) }}" target="_blank" class="btn icon btn-outline-primary" id="trigger-{{ $item->id }}">
-                          <i class="fal fa-print" data-toggle="tooltip" title="Cetak"></i>
-                        </a>
+                      @if (auth()->user()->role == 'Kepala Lab')
+                        <button type="button" class="btn icon btn-{{ $item->detail->laporan_unapproved ? '' : 'outline-' }}primary" data-bs-toggle="modal" data-bs-target="#uploadUnapproved-{{ $item->id }}">
+                          <i class="fal fa-arrow-up-from-bracket" data-toggle="tooltip" title="Upload"></i>
+                        </button>
                       @endif
-                      <button type="button" class="btn icon {{ $item->detail->laporan_download ? 'btn-info' : 'btn-light' }}" data-bs-toggle="modal" data-bs-target="#upload-{{ $item->id }}" {{ $item->detail->laporan_download ? '' : 'disabled' }} id="target-{{ $item->id }}">
-                        <i class="fal fa-arrow-up-from-bracket" data-toggle="tooltip" title="Upload"></i>
-                      </button>
+
+                      @if ($item->detail->laporan_unapproved)
+                        @if ($item->detail->laporan)
+                          <a href="{{ Storage::url($item->detail->laporan) }}" target="_blank" class="btn icon btn-primary">
+                            <i class="fal fa-print" data-toggle="tooltip" title="Cetak"></i>
+                          </a>
+                        @else
+                          <a href="{{ route('print-pdf-unapproved', ['laporan-pengujian', $item->id, Str::afterLast($item->detail->laporan_unapproved, '/')]) }}" target="_blank" class="btn icon btn-outline-primary" id="trigger-{{ $item->id }}">
+                            <i class="fal fa-print" data-toggle="tooltip" title="Cetak"></i>
+                          </a>
+                        @endif
+                      @endif
+
+                      @if (auth()->user()->role == 'Kepala Seksi' && $item->detail->laporan_unapproved)
+                        <button type="button" class="btn icon {{ $item->detail->laporan_download ? 'btn-info' : 'btn-light' }}" data-bs-toggle="modal" data-bs-target="#upload-{{ $item->id }}" {{ $item->detail->laporan_download ? '' : 'disabled' }} id="target-{{ $item->id }}">
+                          <i class="fal fa-arrow-up-from-bracket" data-toggle="tooltip" title="Upload"></i>
+                        </button>
+                      @endif
                     </div>
                   </td>
                 </tr>

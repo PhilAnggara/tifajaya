@@ -26,6 +26,9 @@ return new class extends Migration
             $table->integer('surat_perintah_download')->default(0);
             $table->integer('laporan_download')->default(0);
             $table->integer('surat_pengantar_download')->default(0);
+            $table->text('surat_perintah_unapproved')->nullable();
+            $table->text('laporan_unapproved')->nullable();
+            $table->text('surat_pengantar_unapproved')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

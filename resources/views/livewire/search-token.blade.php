@@ -90,14 +90,36 @@
                 </tbody>
               </table>
             </div>
-            @if ($item->progress() == 100)
-              <div class="text-center">
-                <a href="{{ Storage::url('files/sample-1.pdf') }}" target="_blank" class="btn btn-sm icon icon-left btn-primary">
-                  <i class="fal fa-file-arrow-down"></i>
-                  Donwload Laporan
-                </a>
-              </div>
-            @endif
+            <div class="d-flex justify-content-center">
+              @if ($item->progress() == 100)
+                @if ($item->detail->laporan)
+                  <div class="text-center me-2">
+                    <a href="{{ Storage::url($item->detail->laporan) }}" target="_blank" class="btn btn-sm icon icon-left btn-primary">
+                      <i class="fal fa-file-arrow-down"></i>
+                      Donwload Laporan
+                    </a>
+                  </div>
+                @else
+                  <span class="badge bg-light me-2">
+                    <i class="fal fa-circle-info"></i>
+                    Laporan Belum di Unggah
+                  </span>
+                @endif
+                @if ($item->detail->surat_pengantar)
+                  <div class="text-center">
+                    <a href="{{ Storage::url($item->detail->surat_pengantar) }}" target="_blank" class="btn btn-sm icon icon-left btn-info">
+                      <i class="fal fa-file-arrow-down"></i>
+                      Donwload SPP
+                    </a>
+                  </div>
+                @else
+                  <span class="badge bg-light me-2">
+                    <i class="fal fa-circle-info"></i>
+                    SPP Belum di Unggah
+                  </span>
+                @endif
+              @endif
+            </div>
           </div>
         </div>
       </div>

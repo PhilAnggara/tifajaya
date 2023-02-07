@@ -8,7 +8,7 @@
       <div class="text-center mb-5">
         <img src="{{ url('frontend/images/logo.png') }}" height="48" class='mb-4'>
         <h3>BPJN Jayapura</h3>
-        <p>Silahkan masuk untuk melanjutkan ke BKAD Inventory.</p>
+        <p>Silahkan masuk untuk melanjutkan ke Tifajaya.</p>
       </div>
       <form action="{{ route('login') }}" method="POST">
         @csrf

@@ -55,9 +55,11 @@
                           <i class="fal fa-print" data-toggle="tooltip" title="Cetak"></i>
                         </a>
                       @endif
-                      <button type="button" class="btn icon {{ $item->detail->surat_perintah_download ? 'btn-info' : 'btn-light' }}" data-bs-toggle="modal" data-bs-target="#upload-{{ $item->id }}" {{ $item->detail->surat_perintah_download ? '' : 'disabled' }} id="target-{{ $item->id }}">
-                        <i class="fal fa-arrow-up-from-bracket" data-toggle="tooltip" title="Upload"></i>
-                      </button>
+                      @if (auth()->user()->role == 'Kepala Seksi')
+                        <button type="button" class="btn icon {{ $item->detail->surat_perintah_download ? 'btn-info' : 'btn-light' }}" data-bs-toggle="modal" data-bs-target="#upload-{{ $item->id }}" {{ $item->detail->surat_perintah_download ? '' : 'disabled' }} id="target-{{ $item->id }}">
+                          <i class="fal fa-arrow-up-from-bracket" data-toggle="tooltip" title="Upload"></i>
+                        </button>
+                      @endif
                     </div>
                   </td>
                 </tr>

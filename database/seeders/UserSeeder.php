@@ -25,17 +25,17 @@ class UserSeeder extends Seeder
             'password' => Hash::make('Admin123')
         ]);
         User::create([
-            'name' => 'Phil Anggara',
-            'username' => 'philanggara',
-            'email' => 'philanggara@gmail.com',
+            'name' => 'Vera Kristianawati',
+            'username' => 'kasek',
+            'email' => 'verakristianawati@gmail.com',
             'telp' => '081234567891',
             'role' => 'Kepala Seksi',
             'password' => Hash::make('Admin123')
         ]);
         User::create([
-            'name' => 'Angga Bawole',
-            'username' => 'anggabawole',
-            'email' => 'anggabawole@gmail.com',
+            'name' => 'Kepala Lab',
+            'username' => 'kalab',
+            'email' => 'kepalalab@gmail.com',
             'telp' => '081234567892',
             'role' => 'Kepala Lab',
             'password' => Hash::make('Admin123')

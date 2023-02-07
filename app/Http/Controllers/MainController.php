@@ -7,6 +7,7 @@ use App\Models\Perusahaan;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Storage;
 
 class MainController extends Controller
 {
@@ -67,10 +68,18 @@ class MainController extends Controller
             $data = [
                 'laporan' => $request->file('document')->storeAs('files/laporan-pengujian', $request->type. ' ('. $item->token.').pdf' ,'public')
             ];
+        } elseif ($request->type == 'Surat Pengantar Pengujian (Belum ditandatangani)') {
+            $data = [
+                'surat_pengantar_unapproved' => $request->file('document')->storeAs('files/surat-pengantar-pengujian', $request->type. '-('. $item->token.').pdf' ,'public')
+            ];
+        } elseif ($request->type == 'Laporan Pengujian (Belum ditandatangani)') {
+            $data = [
+                'laporan_unapproved' => $request->file('document')->storeAs('files/laporan-pengujian', $request->type. '-('. $item->token.').pdf' ,'public')
+            ];
         }
         $item->detail->update($data);
         
-        return redirect()->back()->with('success', $request->type.' berhasil diunggah!');
+        return redirect()->back()->with('success', Str::before($request->type, ' (').' berhasil diunggah!');
     }
 
     public function printPDF($type, $id)
@@ -92,5 +101,27 @@ class MainController extends Controller
             $item->detail->save();
         }
         return $pdf->stream(Str::title(Str::replace('-', ' ', $type)). ' ('. $item->token. ').pdf');
+    }
+
+    public function printPDFunapproved($type, $id)
+    {
+        $item = Perusahaan::find($id);
+
+        if ($type == 'surat-pengantar-pengujian') {
+            if (auth()->user()->role == 'Kepala Seksi') {
+                $item->detail->surat_pengantar_download += 1;
+                $item->detail->save();
+            }
+            $pathToFile = public_path().Storage::url($item->detail->surat_pengantar_unapproved);
+            return response()->file($pathToFile);
+        } elseif ($type == 'laporan-pengujian') {
+            if (auth()->user()->role == 'Kepala Seksi') {
+                $item->detail->laporan_download += 1;
+                $item->detail->save();
+            }
+            $pathToFile = storage_path('app/public/'. $item->detail->laporan_unapproved);
+            $pathToFile = public_path().Storage::url($item->detail->laporan_unapproved);
+            return response()->file($pathToFile);
+        }
     }
 }

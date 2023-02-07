@@ -19,14 +19,14 @@
           </a>
         </li>
 
-        {{-- @if (auth()->user()->role == 'Admin' || auth()->user()->role == 'Kepala Seksi') --}}
+        @if (auth()->user()->role == 'Admin' || auth()->user()->role == 'Kepala Seksi')
           <li class="sidebar-item {{ Request::is('admin/perusahaan') ? 'active' : '' }}">
             <a href="{{ route('perusahaan.index') }}" class='sidebar-link'>
               <i class="far fa-buildings"></i>
               <span>Daftar Perusahaan</span>
             </a>
           </li>
-        {{-- @endif --}}
+        @endif
 
         <li class="sidebar-item {{ Request::is('admin/surat-perintah-pengujian') ? 'active' : '' }}">
           <a href="{{ route('surat-perintah-pengujian') }}" class='sidebar-link'>
@@ -35,14 +35,14 @@
           </a>
         </li>
 
-        {{-- @if (auth()->user()->role == 'Kepala Seksi' || auth()->user()->role == 'Kepala Lab') --}}
+        @if (auth()->user()->role == 'Kepala Seksi' || auth()->user()->role == 'Kepala Lab')
           <li class="sidebar-item {{ Request::is('admin/pengujiaan') ? 'active' : '' }}">
             <a href="{{ route('pengujiaan') }}" class='sidebar-link'>
               <i class="far fa-list-check"></i>
               <span>Pengujian</span>
             </a>
           </li>
-        {{-- @endif --}}
+        @endif
 
         <li class="sidebar-item {{ Request::is('admin/laporan-pengujian') ? 'active' : '' }}">
           <a href="{{ route('laporan-pengujian') }}" class='sidebar-link'>
@@ -58,14 +58,14 @@
           </a>
         </li>
 
-        {{-- @if (auth()->user()->role == 'Kepala Seksi') --}}
+        @if (auth()->user()->role == 'Kepala Seksi')
           <li class="sidebar-item {{ Request::is('admin/kelola-pengguna') ? 'active' : '' }}">
             <a href="{{ route('kelola-pengguna.index') }}" class='sidebar-link'>
               <i class="far fa-users"></i>
               <span>Kelola Pengguna</span>
             </a>
           </li>
-        {{-- @endif --}}
+        @endif
 
       </ul>
     </div>
