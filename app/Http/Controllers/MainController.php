@@ -112,7 +112,8 @@ class MainController extends Controller
                 $item->detail->surat_pengantar_download += 1;
                 $item->detail->save();
             }
-            $pathToFile = public_path().Storage::url($item->detail->surat_pengantar_unapproved);
+            $pathToFile = storage_path('app/public/'. $item->detail->surat_pengantar_unapproved);
+            $pathToFile = public_path().Storage::url($item->detail->surat_pengantar_unapproved);    // delete this line on production
             return response()->file($pathToFile);
         } elseif ($type == 'laporan-pengujian') {
             if (auth()->user()->role == 'Kepala Seksi') {
@@ -120,7 +121,7 @@ class MainController extends Controller
                 $item->detail->save();
             }
             $pathToFile = storage_path('app/public/'. $item->detail->laporan_unapproved);
-            $pathToFile = public_path().Storage::url($item->detail->laporan_unapproved);
+            $pathToFile = public_path().Storage::url($item->detail->laporan_unapproved);    // delete this line on production
             return response()->file($pathToFile);
         }
     }
