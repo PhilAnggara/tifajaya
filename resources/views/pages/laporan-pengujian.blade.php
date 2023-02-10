@@ -46,7 +46,7 @@
                   </td>
                   <td>
                     <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-                      @if (auth()->user()->role == 'Kepala Lab')
+                      @if (auth()->user()->role == 'Admin')
                         <button type="button" class="btn icon btn-{{ $item->detail->laporan_unapproved ? '' : 'outline-' }}primary" data-bs-toggle="modal" data-bs-target="#uploadUnapproved-{{ $item->id }}">
                           <i class="fal fa-arrow-up-from-bracket" data-toggle="tooltip" title="Upload"></i>
                         </button>

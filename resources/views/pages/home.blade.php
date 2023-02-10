@@ -21,7 +21,7 @@
     <div class="container">
       <a data-aos="fade-down" class="navbar-brand" href="{{ route('index') }}">
         <img src="{{ url('frontend/images/navbar-brand.png') }}" class="d-inline-block align-text-top brand">
-        Tifajaya
+        TifaJaya
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -52,8 +52,8 @@
   <script>
     var typed = new Typed('#typed', {
       strings: [
-        'Tifajaya',
-        'Kementerian <strong>PUPR</strong>'
+        'TifaJaya',
+        // 'Kementerian <strong>PUPR</strong>'
       ],
       // startDelay: 200,
       typeSpeed: 15,
@@ -67,6 +67,7 @@
   @include('includes.script')
   @include('sweetalert::alert')
   @livewireScripts
+  <script src="{{ url('frontend/vendors/jquery/jquery-3.6.0.js') }}"></script>
 
   <script>
     // click button when press enter
@@ -76,6 +77,16 @@
         document.getElementById('searchToken').click();
       }
     });
+
+    // close the modal when livewire browser event is fired using vanilla js
+    window.addEventListener('terkirim', event => {
+      $('#kusioner').modal('hide');
+      console.log('Berhasil terkirim');
+      Swal.fire({
+        title: 'Respon anda berhasil dikirim!',
+        icon: 'success',
+      });
+    })
   </script>
 
 </body>

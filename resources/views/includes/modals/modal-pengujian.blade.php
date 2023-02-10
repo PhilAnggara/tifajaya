@@ -58,7 +58,7 @@
                       @else
                         <span class="badge bg-danger">
                           <i class="fal fa-circle-xmark"></i>
-                          Gagal
+                          Menunggu Material Pengganti
                         </span>
                       @endif
                     </td>

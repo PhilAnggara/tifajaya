@@ -4,9 +4,9 @@
 @section('content')
 <div>
   <p style="margin-left:0.8pt; text-align:justify"><img
-      src="frontend/images/pdf/Aspose.Words.27662e30-7acd-4167-993e-04bb66c9be5e.001.png" width="620" height="105" alt=""
+      src="{{ public_path('frontend/images/pdf/Aspose.Words.27662e30-7acd-4167-993e-04bb66c9be5e.001.png') }}" width="620" height="105" alt=""
       style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" /><img
-      src="frontend/images/pdf/Aspose.Words.27662e30-7acd-4167-993e-04bb66c9be5e.002.png" width="500" height="92" alt=""
+      src="{{ public_path('frontend/images/pdf/Aspose.Words.27662e30-7acd-4167-993e-04bb66c9be5e.002.png') }}" width="500" height="92" alt=""
       style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
   </p>
   <p style="margin-top:19.45pt; margin-left:91.45pt; text-align:justify; line-height:17.1pt"><span
@@ -232,7 +232,7 @@
       <td
         style="width:94.02pt; border-top-style:solid; border-top-width:0.75pt; border-left-style:solid; border-left-width:0.75pt; padding-left:3.38pt; vertical-align:middle; background-color:#f2f2f2; -aw-border-left:0.5pt single; -aw-border-top:0.5pt single">
         <p style="margin-top:0.05pt; text-align:justify; font-size:12pt"><img
-            src="frontend/images/pdf/Aspose.Words.27662e30-7acd-4167-993e-04bb66c9be5e.003.png" width="122" height="23" alt=""
+            src="{{ public_path('frontend/images/pdf/Aspose.Words.27662e30-7acd-4167-993e-04bb66c9be5e.003.png') }}" width="122" height="23" alt=""
             style="-aw-left-pos:0pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:inline" />
         </p>
       </td>

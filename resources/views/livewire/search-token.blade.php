@@ -34,7 +34,7 @@
               {{ $item->nama_perusahaan }}
               <small class="text-muted">( {{ $item->token }} )</small>
             </h5>
-            <p class="card-text">Pengujian Beton</p>
+            <p class="card-text">Pengujian {{ $item->jenisPengujian()->jenis }}</p>
             <div class="progress progress-{{ $item->progress() == 100 ? 'primary' : 'info' }} mb-4">
               <div class="progress-bar progress-label" role="progressbar" style="width: {{ $item->progress() }}%"  aria-valuenow="{{ $item->progress() }}" aria-valuemin="0" aria-valuemax="100"></div>
             </div>
@@ -81,7 +81,7 @@
                         @else
                           <span class="badge bg-danger">
                             <i class="fal fa-circle-xmark"></i>
-                            Gagal
+                            Menunggu Material Pengganti
                           </span>
                         @endif
                       </td>
@@ -90,36 +90,49 @@
                 </tbody>
               </table>
             </div>
-            <div class="d-flex justify-content-center">
-              @if ($item->progress() == 100)
-                @if ($item->detail->laporan)
-                  <div class="text-center me-2">
-                    <a href="{{ Storage::url($item->detail->laporan) }}" target="_blank" class="btn btn-sm icon icon-left btn-primary">
-                      <i class="fal fa-file-arrow-down"></i>
-                      Donwload Laporan
-                    </a>
-                  </div>
-                @else
-                  <span class="badge bg-light me-2">
-                    <i class="fal fa-circle-info"></i>
-                    Laporan Belum di Unggah
-                  </span>
-                @endif
-                @if ($item->detail->surat_pengantar)
-                  <div class="text-center">
-                    <a href="{{ Storage::url($item->detail->surat_pengantar) }}" target="_blank" class="btn btn-sm icon icon-left btn-info">
-                      <i class="fal fa-file-arrow-down"></i>
-                      Donwload SPP
-                    </a>
-                  </div>
-                @else
-                  <span class="badge bg-light me-2">
-                    <i class="fal fa-circle-info"></i>
-                    SPP Belum di Unggah
-                  </span>
-                @endif
+            @if ($item->progress() == 100)
+              @if (!$item->response)
+                <small class="text-muted d-block">
+                  <i class="fal fa-circle-info"></i>
+                  Silahkan mengisi kusioner sebelum mendownload Laporan dan SPP
+                </small>
+                <div class="text-center">
+                  <button class="btn btn-sm icon icon-left btn-outline-primary" data-bs-toggle="modal" data-bs-target="#kusioner">
+                    <i class="fal fa-list-ol"></i>
+                    Isi kusioner
+                  </button>
+                </div>
+              @else
+                <div class="d-flex justify-content-center">
+                  @if ($item->detail->laporan)
+                    <div class="text-center me-2">
+                      <a href="{{ Storage::url($item->detail->laporan) }}" target="_blank" class="btn btn-sm icon icon-left btn-primary">
+                        <i class="fal fa-file-arrow-down"></i>
+                        Donwload Laporan
+                      </a>
+                    </div>
+                  @else
+                    <span class="badge bg-light me-2">
+                      <i class="fal fa-circle-info"></i>
+                      Laporan Belum di Unggah
+                    </span>
+                  @endif
+                  @if ($item->detail->surat_pengantar)
+                    <div class="text-center">
+                      <a href="{{ Storage::url($item->detail->surat_pengantar) }}" target="_blank" class="btn btn-sm icon icon-left btn-info">
+                        <i class="fal fa-file-arrow-down"></i>
+                        Donwload SPP
+                      </a>
+                    </div>
+                  @else
+                    <span class="badge bg-light me-2">
+                      <i class="fal fa-circle-info"></i>
+                      SPP Belum di Unggah
+                    </span>
+                  @endif
+                </div>
               @endif
-            </div>
+            @endif
           </div>
         </div>
       </div>
@@ -139,5 +152,7 @@
     @endif
 
   </div>
+
+  @include('includes.modals.modal-kusioner')
 
 </div>

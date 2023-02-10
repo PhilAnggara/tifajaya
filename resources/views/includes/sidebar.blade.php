@@ -35,14 +35,14 @@
           </a>
         </li>
 
-        @if (auth()->user()->role == 'Kepala Seksi' || auth()->user()->role == 'Kepala Lab')
+        {{-- @if (auth()->user()->role == 'Kepala Seksi' || auth()->user()->role == 'Kepala Lab') --}}
           <li class="sidebar-item {{ Request::is('admin/pengujiaan') ? 'active' : '' }}">
             <a href="{{ route('pengujiaan') }}" class='sidebar-link'>
               <i class="far fa-list-check"></i>
               <span>Pengujian</span>
             </a>
           </li>
-        @endif
+        {{-- @endif --}}
 
         <li class="sidebar-item {{ Request::is('admin/laporan-pengujian') ? 'active' : '' }}">
           <a href="{{ route('laporan-pengujian') }}" class='sidebar-link'>
@@ -54,7 +54,7 @@
         <li class="sidebar-item {{ Request::is('admin/surat-pengantar-pengujian') ? 'active' : '' }}">
           <a href="{{ route('surat-pengantar-pengujian') }}" class='sidebar-link'>
             <i class="far fa-memo"></i>
-            <span>Surat Pengantar Pengujain</span>
+            <span>Surat Pengantar Pengujian</span>
           </a>
         </li>
 

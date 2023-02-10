@@ -45,4 +45,9 @@ class Perusahaan extends Model
         $result = $selesai / $total * 100;
         return number_format($result, 0);
     }
+
+    public function response()
+    {
+        return $this->hasOne(Responden::class, 'id_perusahaan', 'id');
+    }
 }
