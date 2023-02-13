@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\JenisPengujian;
 use App\Models\Pengujian;
 use App\Models\Perusahaan;
 use Illuminate\Support\Str;
@@ -13,7 +14,18 @@ class MainController extends Controller
 {
     public function index()
     {
-        return view('pages.home');
+        $jenis_pengujian = JenisPengujian::with('itemPengujian')->get();
+        $harga = json_decode(file_get_contents(storage_path('app/public/files/harga.json'), true));
+
+        // return response()->json([
+        //     'harga' => $harga->jenis_pengujian[0]
+        // ]);
+        // dd($harga->jenis_pengujian[0]->item_pengujian);
+
+        return view('pages.home', [
+            'jenis_pengujian' => $jenis_pengujian,
+            'harga' => $harga->jenis_pengujian
+        ]);
     }
     
     public function beranda()

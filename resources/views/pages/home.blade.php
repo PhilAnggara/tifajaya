@@ -28,6 +28,7 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav ms-auto">
+          <a data-aos="fade-down" class="nav-link text-center pt-3 me-md-3 text-white" data-bs-toggle="modal" data-bs-target="#harga" href="">HARGA PENGUJIAN</a>
           <a data-aos="fade-down" class="nav-link btn btn-outline-primary px-3 my-btn" href="{{ route('beranda') }}">ADMIN</a>
         </div>
       </div>
@@ -47,6 +48,7 @@
     @livewire('search-token')
 
   </div>
+  @include('includes.modals.modal-home')
 
 
   <script>
