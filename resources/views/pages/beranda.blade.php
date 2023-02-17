@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Beranda Admin - Tifajaya')
+@section('title', 'Beranda Admin')
 
 @section('content')
 <div class="main-content container-fluid">

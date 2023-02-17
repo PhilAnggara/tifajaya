@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Surat Perintah Pengujian - Tifajaya')
+@section('title', 'Surat Perintah Pengujian')
 @inject('carbon', 'Carbon\Carbon')
 
 @section('content')

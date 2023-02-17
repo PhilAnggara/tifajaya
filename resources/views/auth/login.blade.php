@@ -1,5 +1,5 @@
 @extends('layouts.auth')
-@section('title', 'Masuk - Tifajaya')
+@section('title', 'Masuk')
 
 @section('content')
 <div class="col-md-5 col-sm-12 mx-auto">
@@ -8,7 +8,7 @@
       <div class="text-center mb-5">
         <img src="{{ url('frontend/images/logo.png') }}" height="48" class='mb-4'>
         <h3>BPJN Jayapura</h3>
-        <p>Silahkan masuk untuk melanjutkan ke Tifajaya.</p>
+        <p>Silahkan masuk untuk melanjutkan ke SIKLOP LAB.</p>
       </div>
       <form action="{{ route('login') }}" method="POST">
         @csrf

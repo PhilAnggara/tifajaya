@@ -3,8 +3,9 @@
     <div class="sidebar-header">
       {{-- <img src="{{ url('frontend/images/logo.png') }}" alt="" srcset=""> --}}
       <a href="{{ route('beranda') }}" class="brand">
-        <h1>BPJN</h1>
-        <h2>Jayapura</h2>
+        <h1 style="font-size: 30px;">SIKLOP LAB</h1>
+        {{-- <h1>BPJN</h1>
+        <h2>Jayapura</h2> --}}
       </a>
     </div>
     <div class="sidebar-menu">

@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Tifajaya</title>
+  <title>SIKLOP LAB</title>
 
   @inject('carbon', 'Carbon\Carbon')
   @include('includes.style')
@@ -21,7 +21,7 @@
     <div class="container">
       <a data-aos="fade-down" class="navbar-brand" href="{{ route('index') }}">
         <img src="{{ url('frontend/images/navbar-brand.png') }}" class="d-inline-block align-text-top brand">
-        TifaJaya
+        SIKLOP LAB
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -54,7 +54,7 @@
   <script>
     var typed = new Typed('#typed', {
       strings: [
-        'TifaJaya',
+        'SIKLOP LAB',
         // 'Kementerian <strong>PUPR</strong>'
       ],
       // startDelay: 200,
