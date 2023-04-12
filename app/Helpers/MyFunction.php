@@ -112,4 +112,41 @@ class MyFunction
                 break;
         }
     }
+
+    public static function penyebut($nilai) {
+		$nilai = abs($nilai);
+		$huruf = array("", "satu", "dua", "tiga", "empat", "lima", "enam", "tujuh", "delapan", "sembilan", "sepuluh", "sebelas");
+		$temp = "";
+		if ($nilai < 12) {
+			$temp = " ". $huruf[$nilai];
+		} else if ($nilai <20) {
+			$temp = MyFunction::penyebut($nilai - 10). " belas";
+		} else if ($nilai < 100) {
+			$temp = MyFunction::penyebut($nilai/10)." puluh". MyFunction::penyebut($nilai % 10);
+		} else if ($nilai < 200) {
+			$temp = " seratus" . MyFunction::penyebut($nilai - 100);
+		} else if ($nilai < 1000) {
+			$temp = MyFunction::penyebut($nilai/100) . " ratus" . MyFunction::penyebut($nilai % 100);
+		} else if ($nilai < 2000) {
+			$temp = " seribu" . MyFunction::penyebut($nilai - 1000);
+		} else if ($nilai < 1000000) {
+			$temp = MyFunction::penyebut($nilai/1000) . " ribu" . MyFunction::penyebut($nilai % 1000);
+		} else if ($nilai < 1000000000) {
+			$temp = MyFunction::penyebut($nilai/1000000) . " juta" . MyFunction::penyebut($nilai % 1000000);
+		} else if ($nilai < 1000000000000) {
+			$temp = MyFunction::penyebut($nilai/1000000000) . " milyar" . MyFunction::penyebut(fmod($nilai,1000000000));
+		} else if ($nilai < 1000000000000000) {
+			$temp = MyFunction::penyebut($nilai/1000000000000) . " trilyun" . MyFunction::penyebut(fmod($nilai,1000000000000));
+		}     
+		return $temp;
+	}
+
+    public static function terbilang($nilai) {
+		if($nilai<0) {
+			$hasil = "minus ". trim(MyFunction::penyebut($nilai));
+		} else {
+			$hasil = trim(MyFunction::penyebut($nilai));
+		}     		
+		return $hasil;
+	} 
 }

@@ -1,5 +1,6 @@
 @extends('layouts.pdf')
 @section('title', 'Surat Perintah Pengujian (Belum ditandatangani).pdf')
+@inject('carbon', 'Carbon\Carbon')
 
 @section('content')
   <div>
@@ -13,7 +14,7 @@
     <table cellspacing="0" cellpadding="0" class="TableGrid" style="margin-left:0.25pt; margin-bottom:0pt; -aw-border-insideh:0.5pt single #000000; -aw-border-insidev:0.5pt single #000000; border-collapse:collapse">
       <tr>
         <td colspan="3" style="width:440pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
-          <p style="margin-bottom:0pt; text-align:center; font-size:11pt"><span>No. …/SPP-Lab.Bb18/XX/2023</span></p>
+          <p style="margin-bottom:0pt; text-align:center; font-size:11pt"><span>No. {{ $item->detail->no_surat }}</span></p>
         </td>
       </tr>
       <tr>
@@ -29,17 +30,13 @@
       </tr>
       <tr>
         <td colspan="3" style="width:440pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
-          <p style="margin-bottom:0pt; font-size:11pt"><span>Pada hari ini,………….tanggal…………bulan………….tahun,………yang
-              bertanda tangan di bawah ini:</span></p>
+          <p style="margin-bottom:0pt; font-size:11pt"><span>Pada hari ini {{ $carbon::now()->isoFormat('dddd D MMMM Y') }}, yang bertanda tangan di bawah ini:</span></p>
         </td>
       </tr>
     </table>
     <p><span style="-aw-import:ignore">&#xa0;</span></p>
     <table cellspacing="0" cellpadding="0" class="TableGrid" style="margin-bottom:0pt; border-collapse:collapse">
       <tr>
-        <td style="width:17.3pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
-          <p style="margin-bottom:0pt; font-size:11pt"><span>1.</span></p>
-        </td>
         <td style="width:53pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
           <p style="margin-bottom:0pt; font-size:11pt"><span>Nama</span></p>
         </td>
@@ -51,9 +48,6 @@
         </td>
       </tr>
       <tr>
-        <td style="width:17.3pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
-          <p style="margin-bottom:0pt; font-size:11pt"><span style="-aw-import:ignore">&#xa0;</span></p>
-        </td>
         <td style="width:53pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
           <p style="margin-bottom:0pt; font-size:11pt"><span>Alamat</span></p>
         </td>
@@ -66,9 +60,6 @@
         </td>
       </tr>
       <tr>
-        <td style="width:17.3pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
-          <p style="margin-bottom:0pt; font-size:11pt"><span style="-aw-import:ignore">&#xa0;</span></p>
-        </td>
         <td style="width:53pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
           <p style="margin-bottom:0pt; font-size:11pt"><span>Jabatan</span></p>
         </td>
@@ -93,9 +84,6 @@
     <p style="margin-bottom:0pt"><span style="-aw-import:ignore">&#xa0;</span></p>
     <table cellspacing="0" cellpadding="0" class="TableGrid" style="margin-bottom:0pt; border-collapse:collapse">
       <tr>
-        <td style="width:17.3pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
-          <p style="margin-bottom:0pt; font-size:11pt"><span>2.</span></p>
-        </td>
         <td style="width:53pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
           <p style="margin-bottom:0pt; font-size:11pt"><span>Nama</span></p>
         </td>
@@ -103,13 +91,12 @@
           <p style="margin-bottom:0pt; font-size:11pt"><span>:</span></p>
         </td>
         <td style="width:333.9pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
-          <p style="margin-bottom:0pt; font-size:11pt"><span style="-aw-import:ignore">&#xa0;</span></p>
+          <p style="margin-bottom:0pt; font-size:11pt">
+            <span>{{ $item->nama_pj }}</span>
+          </p>
         </td>
       </tr>
       <tr>
-        <td style="width:17.3pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
-          <p style="margin-bottom:0pt; font-size:11pt"><span style="-aw-import:ignore">&#xa0;</span></p>
-        </td>
         <td style="width:53pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
           <p style="margin-bottom:0pt; font-size:11pt"><span>Alamat</span></p>
         </td>
@@ -117,14 +104,12 @@
           <p style="margin-bottom:0pt; font-size:11pt"><span>:</span></p>
         </td>
         <td style="width:333.9pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
-          <p style="margin-bottom:0pt; text-align:justify; font-size:11pt"><span style="-aw-import:ignore">&#xa0;</span>
+          <p style="margin-bottom:0pt; text-align:justify; font-size:11pt">
+            <span>{{ $item->alamat }}</span>
           </p>
         </td>
       </tr>
       <tr>
-        <td style="width:17.3pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
-          <p style="margin-bottom:0pt; font-size:11pt"><span style="-aw-import:ignore">&#xa0;</span></p>
-        </td>
         <td style="width:53pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
           <p style="margin-bottom:0pt; font-size:11pt"><span>Jabatan</span></p>
         </td>
@@ -132,7 +117,9 @@
           <p style="margin-bottom:0pt; font-size:11pt"><span>:</span></p>
         </td>
         <td style="width:333.9pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
-          <p style="margin-bottom:0pt; font-size:11pt"><span style="-aw-import:ignore">&#xa0;</span></p>
+          <p style="margin-bottom:0pt; font-size:11pt">
+            <span>{{ $item->jabatan_pj }}</span>
+          </p>
         </td>
       </tr>
     </table>
@@ -150,27 +137,8 @@
     <table cellspacing="0" cellpadding="0" class="TableGrid"
       style="margin-bottom:0pt; -aw-border-insideh:0.5pt single #000000; -aw-border-insidev:0.5pt single #000000; border-collapse:collapse">
       <tr>
-        <td style="width:57.8pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
-          <p style="margin-bottom:0pt; font-size:11pt"><span>Berdasarkan</span></p>
-        </td>
-        <td style="width:5.4pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
-          <p style="margin-bottom:0pt; font-size:11pt"><span>:</span></p>
-        </td>
-        <td style="width:355.2pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
-          <p style="margin-bottom:0pt; font-size:11pt"><span>Surat Permohonan Pengujian PT. …………………. nomor …………….
-              tanggal ………….</span></p>
-        </td>
-      </tr>
-      <tr>
-        <td colspan="3" style="width:440pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
-          <p style="margin-bottom:0pt; font-size:11pt"><span>Paket ………………… Nomor Kontrak ………………… tanggal …………… di Satuan
-              Kerja PJN Wilayah……….</span></p>
-        </td>
-      </tr>
-      <tr>
-        <td colspan="3" style="width:440pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
-          <p style="margin-bottom:0pt; font-size:11pt"><span>Prov. ………….(………) PPK ……………, selanjutnya disebut
-            </span><span style="font-weight:bold">PEMILIK PROYEK</span></p>
+        <td style="padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
+          <p style="margin-bottom:10pt; font-size:11pt"><span>Berdasarkan : Surat Permohonan Pengujian {{ $item->nama_perusahaan }} nomor {{ $item->no_sp }} tanggal {{ $carbon::parse($item->tgl_sp)->isoFormat('D MMMM Y') }} Paket {{ $item->paket }} Nomor Kontrak {{ $item->no_kontrak }} tanggal {{ $carbon::parse($item->tgl_daftar)->isoFormat('D MMMM Y') }} di Satuan Kerja {{ $item->satuan_kerja }}, selanjutnya disebut</span> <span style="font-weight:bold">PEMILIK PROYEK</span></p>
         </td>
       </tr>
       <tr>
@@ -214,8 +182,7 @@
         </td>
         <td
           style="width:88.45pt; border-right-style:solid; border-right-width:0.75pt; border-left-style:solid; border-left-width:0.75pt; border-bottom-style:solid; border-bottom-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt; vertical-align:top; -aw-border-bottom:0.5pt single; -aw-border-left:0.5pt single; -aw-border-right:0.5pt single">
-          <p style="margin-bottom:0pt; text-align:center; font-size:11pt"><span style="font-weight:bold">ITEM
-              PENGUJIAN</span></p>
+          <p style="margin-bottom:0pt; text-align:center; font-size:11pt"><span style="font-weight:bold">ITEM PENGUJIAN</span></p>
         </td>
         <td
           style="width:60.05pt; border-right-style:solid; border-right-width:0.75pt; border-left-style:solid; border-left-width:0.75pt; border-bottom-style:solid; border-bottom-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt; vertical-align:top; -aw-border-bottom:0.5pt single; -aw-border-left:0.5pt single; -aw-border-right:0.5pt single">
@@ -238,115 +205,40 @@
               (RP)</span></p>
         </td>
       </tr>
-      <tr>
-        <td
-          style="width:17.3pt; border-top-style:solid; border-top-width:0.75pt; border-right-style:solid; border-right-width:0.75pt; border-bottom-style:solid; border-bottom-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt; vertical-align:top; -aw-border-bottom:0.5pt single; -aw-border-right:0.5pt single; -aw-border-top:0.5pt single">
-          <p style="margin-bottom:0pt; font-size:11pt"><span>1.</span></p>
-        </td>
-        <td
-          style="width:88.45pt; border-style:solid; border-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt; vertical-align:top; -aw-border:0.5pt single">
-          <p style="margin-bottom:0pt; font-size:11pt"><span style="-aw-import:ignore">&#xa0;</span></p>
-        </td>
-        <td
-          style="width:60.05pt; border-style:solid; border-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt; vertical-align:top; -aw-border:0.5pt single">
-          <p style="margin-bottom:0pt; font-size:11pt"><span style="-aw-import:ignore">&#xa0;</span></p>
-        </td>
-        <td
-          style="width:53pt; border-style:solid; border-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt; vertical-align:top; -aw-border:0.5pt single">
-          <p style="margin-bottom:0pt; font-size:11pt"><span style="-aw-import:ignore">&#xa0;</span></p>
-        </td>
-        <td
-          style="width:81.35pt; border-style:solid; border-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt; vertical-align:top; -aw-border:0.5pt single">
-          <p style="margin-bottom:0pt; font-size:11pt"><span style="-aw-import:ignore">&#xa0;</span></p>
-        </td>
-        <td
-          style="width:85.85pt; border-top-style:solid; border-top-width:0.75pt; border-left-style:solid; border-left-width:0.75pt; border-bottom-style:solid; border-bottom-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt; vertical-align:top; -aw-border-bottom:0.5pt single; -aw-border-left:0.5pt single; -aw-border-top:0.5pt single">
-          <p style="margin-bottom:0pt; font-size:11pt"><span style="-aw-import:ignore">&#xa0;</span></p>
-        </td>
-      </tr>
-      <tr>
-        <td
-          style="width:17.3pt; border-top-style:solid; border-top-width:0.75pt; border-right-style:solid; border-right-width:0.75pt; border-bottom-style:solid; border-bottom-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt; vertical-align:top; -aw-border-bottom:0.5pt single; -aw-border-right:0.5pt single; -aw-border-top:0.5pt single">
-          <p style="margin-bottom:0pt; font-size:11pt"><span>2.</span></p>
-        </td>
-        <td
-          style="width:88.45pt; border-style:solid; border-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt; vertical-align:top; -aw-border:0.5pt single">
-          <p style="margin-bottom:0pt; font-size:11pt"><span style="-aw-import:ignore">&#xa0;</span></p>
-        </td>
-        <td
-          style="width:60.05pt; border-style:solid; border-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt; vertical-align:top; -aw-border:0.5pt single">
-          <p style="margin-bottom:0pt; font-size:11pt"><span style="-aw-import:ignore">&#xa0;</span></p>
-        </td>
-        <td
-          style="width:53pt; border-style:solid; border-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt; vertical-align:top; -aw-border:0.5pt single">
-          <p style="margin-bottom:0pt; font-size:11pt"><span style="-aw-import:ignore">&#xa0;</span></p>
-        </td>
-        <td
-          style="width:81.35pt; border-style:solid; border-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt; vertical-align:top; -aw-border:0.5pt single">
-          <p style="margin-bottom:0pt; font-size:11pt"><span style="-aw-import:ignore">&#xa0;</span></p>
-        </td>
-        <td
-          style="width:85.85pt; border-top-style:solid; border-top-width:0.75pt; border-left-style:solid; border-left-width:0.75pt; border-bottom-style:solid; border-bottom-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt; vertical-align:top; -aw-border-bottom:0.5pt single; -aw-border-left:0.5pt single; -aw-border-top:0.5pt single">
-          <p style="margin-bottom:0pt; font-size:11pt"><span style="-aw-import:ignore">&#xa0;</span></p>
-        </td>
-      </tr>
-      <tr>
-        <td
-          style="width:17.3pt; border-top-style:solid; border-top-width:0.75pt; border-right-style:solid; border-right-width:0.75pt; border-bottom-style:solid; border-bottom-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt; vertical-align:top; -aw-border-bottom:0.5pt single; -aw-border-right:0.5pt single; -aw-border-top:0.5pt single">
-          <p style="margin-bottom:0pt; font-size:11pt"><span>3.</span></p>
-        </td>
-        <td
-          style="width:88.45pt; border-style:solid; border-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt; vertical-align:top; -aw-border:0.5pt single">
-          <p style="margin-bottom:0pt; font-size:11pt"><span style="-aw-import:ignore">&#xa0;</span></p>
-        </td>
-        <td
-          style="width:60.05pt; border-style:solid; border-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt; vertical-align:top; -aw-border:0.5pt single">
-          <p style="margin-bottom:0pt; font-size:11pt"><span style="-aw-import:ignore">&#xa0;</span></p>
-        </td>
-        <td
-          style="width:53pt; border-style:solid; border-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt; vertical-align:top; -aw-border:0.5pt single">
-          <p style="margin-bottom:0pt; font-size:11pt"><span style="-aw-import:ignore">&#xa0;</span></p>
-        </td>
-        <td
-          style="width:81.35pt; border-style:solid; border-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt; vertical-align:top; -aw-border:0.5pt single">
-          <p style="margin-bottom:0pt; font-size:11pt"><span style="-aw-import:ignore">&#xa0;</span></p>
-        </td>
-        <td
-          style="width:85.85pt; border-top-style:solid; border-top-width:0.75pt; border-left-style:solid; border-left-width:0.75pt; border-bottom-style:solid; border-bottom-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt; vertical-align:top; -aw-border-bottom:0.5pt single; -aw-border-left:0.5pt single; -aw-border-top:0.5pt single">
-          <p style="margin-bottom:0pt; font-size:11pt"><span style="-aw-import:ignore">&#xa0;</span></p>
-        </td>
-      </tr>
-      <tr>
-        <td
-          style="width:17.3pt; border-top-style:solid; border-top-width:0.75pt; border-right-style:solid; border-right-width:0.75pt; border-bottom-style:solid; border-bottom-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt; vertical-align:top; -aw-border-bottom:0.5pt single; -aw-border-right:0.5pt single; -aw-border-top:0.5pt single">
-          <p style="margin-bottom:0pt; font-size:11pt"><span>4.</span></p>
-        </td>
-        <td
-          style="width:88.45pt; border-style:solid; border-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt; vertical-align:top; -aw-border:0.5pt single">
-          <p style="margin-bottom:0pt; font-size:11pt"><span style="-aw-import:ignore">&#xa0;</span></p>
-        </td>
-        <td
-          style="width:60.05pt; border-style:solid; border-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt; vertical-align:top; -aw-border:0.5pt single">
-          <p style="margin-bottom:0pt; font-size:11pt"><span style="-aw-import:ignore">&#xa0;</span></p>
-        </td>
-        <td
-          style="width:53pt; border-style:solid; border-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt; vertical-align:top; -aw-border:0.5pt single">
-          <p style="margin-bottom:0pt; font-size:11pt"><span style="-aw-import:ignore">&#xa0;</span></p>
-        </td>
-        <td
-          style="width:81.35pt; border-style:solid; border-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt; vertical-align:top; -aw-border:0.5pt single">
-          <p style="margin-bottom:0pt; font-size:11pt"><span style="-aw-import:ignore">&#xa0;</span></p>
-        </td>
-        <td
-          style="width:85.85pt; border-top-style:solid; border-top-width:0.75pt; border-left-style:solid; border-left-width:0.75pt; border-bottom-style:solid; border-bottom-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt; vertical-align:top; -aw-border-bottom:0.5pt single; -aw-border-left:0.5pt single; -aw-border-top:0.5pt single">
-          <p style="margin-bottom:0pt; font-size:11pt"><span style="-aw-import:ignore">&#xa0;</span></p>
-        </td>
-      </tr>
+      @foreach ($item->jenisPengujian()->itemPengujian as $itemPengujian)
+        <tr>
+          <td
+            style="width:17.3pt; border-top-style:solid; border-top-width:0.75pt; border-right-style:solid; border-right-width:0.75pt; border-bottom-style:solid; border-bottom-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt; vertical-align:top; -aw-border-bottom:0.5pt single; -aw-border-right:0.5pt single; -aw-border-top:0.5pt single">
+            <p style="margin-bottom:0pt; font-size:11pt"><span>{{ $loop->iteration }}.</span></p>
+          </td>
+          <td
+            style="width:88.45pt; border-style:solid; border-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt; vertical-align:top; -aw-border:0.5pt single">
+            <p style="margin-bottom:0pt; font-size:11pt"><span style="-aw-import:ignore">{{ $itemPengujian->item }}</span></p>
+          </td>
+          <td
+            style="width:60.05pt; border-style:solid; border-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt; vertical-align:top; -aw-border:0.5pt single">
+            <p style="margin-bottom:0pt; font-size:11pt"><span style="-aw-import:ignore">1</span></p>
+          </td>
+          <td
+            style="width:53pt; border-style:solid; border-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt; vertical-align:top; -aw-border:0.5pt single">
+            <p style="margin-bottom:0pt; font-size:11pt"><span style="-aw-import:ignore">Set</span></p>
+          </td>
+          <td
+            style="width:81.35pt; border-style:solid; border-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt; vertical-align:top; -aw-border:0.5pt single">
+            <p style="margin-bottom:0pt; font-size:11pt"><span style="-aw-import:ignore">{{ number_format($itemPengujian->harga, 0, ',', '.') }}</span></p>
+          </td>
+          <td
+            style="width:85.85pt; border-top-style:solid; border-top-width:0.75pt; border-left-style:solid; border-left-width:0.75pt; border-bottom-style:solid; border-bottom-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt; vertical-align:top; -aw-border-bottom:0.5pt single; -aw-border-left:0.5pt single; -aw-border-top:0.5pt single">
+            <p style="margin-bottom:0pt; font-size:11pt"><span style="-aw-import:ignore">{{ number_format($itemPengujian->harga, 0, ',', '.') }}</span></p>
+          </td>
+        </tr>
+      @endforeach
       <tr>
         <td colspan="3"
           style="width:187.4pt; border-top-style:solid; border-top-width:0.75pt; border-right-style:solid; border-right-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt; vertical-align:top; -aw-border-right:0.5pt single; -aw-border-top:0.5pt single">
-          <p style="margin-bottom:0pt; text-align:right; font-size:11pt"><span style="font-weight:bold">TOTAL BIAYA
-              PENGUJIAN</span></p>
+          <p style="margin-bottom:0pt; text-align:right; font-size:11pt">
+            <span style="font-weight:bold">TOTAL BIAYA PENGUJIAN</span>
+          </p>
         </td>
         <td
           style="width:53pt; border-top-style:solid; border-top-width:0.75pt; border-right-style:solid; border-right-width:0.75pt; border-left-style:solid; border-left-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt; vertical-align:top; -aw-border-left:0.5pt single; -aw-border-right:0.5pt single; -aw-border-top:0.5pt single">
@@ -358,7 +250,7 @@
         </td>
         <td
           style="width:85.85pt; border-top-style:solid; border-top-width:0.75pt; border-left-style:solid; border-left-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt; vertical-align:top; -aw-border-left:0.5pt single; -aw-border-top:0.5pt single">
-          <p style="margin-bottom:0pt; font-size:11pt"><span style="-aw-import:ignore">&#xa0;</span></p>
+          <p style="margin-bottom:0pt; font-size:11pt"><span style="-aw-import:ignore">{{ number_format($item->jenisPengujian()->itemPengujian->sum('harga'), 0, ',', '.') }}</span></p>
         </td>
       </tr>
     </table>
@@ -372,18 +264,15 @@
         <td style="width:5.7pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
           <p style="margin-bottom:0pt; font-size:11pt"><span>:</span></p>
         </td>
-        <td style="width:68.4pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
-          <p style="margin-bottom:0pt; font-size:11pt"><span>………………………</span></p>
-        </td>
-        <td style="width:37.55pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
-          <p style="margin-bottom:0pt; font-size:11pt"><span style="font-weight:bold; font-style:italic">Rupiah.</span>
+        <td style="padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
+          <p style="margin-bottom:0pt; font-size:11pt"><span style="font-weight:bold; font-style:italic">{{ Str::title($terbilang) }} Rupiah.</span>
           </p>
         </td>
       </tr>
     </table>
-    <p><span style="-aw-import:ignore">&#xa0;</span></p>
-    <p><span style="-aw-import:ignore">&#xa0;</span></p>
-    <p><span style="-aw-import:ignore">&#xa0;</span></p>
+    
+    <div class="page-break"></div>
+
     <div style="-aw-headerfooter-type:footer-primary; clear:both">
       <p class="Footer"><span style="-aw-import:ignore">&#xa0;</span></p>
     </div>
@@ -409,9 +298,6 @@
         </td>
       </tr>
       <tr>
-        <td style="width:17.3pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
-          <p style="margin-bottom:0pt; font-size:11pt"><span style="font-weight:bold">1)</span></p>
-        </td>
         <td style="width:411.9pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
           <p style="margin-bottom:0pt; font-size:11pt"><span>Jenis bahan uji yang diserahkan </span><span
               style="font-weight:bold">PIHAK KEDUA </span><span>dan peruntukkannya adalah sebagai berikut:</span></p>
@@ -520,9 +406,6 @@
     <p><span style="-aw-import:ignore">&#xa0;</span></p>
     <table cellspacing="0" cellpadding="0" class="TableGrid" style="margin-bottom:0pt; border-collapse:collapse">
       <tr>
-        <td style="width:17.3pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
-          <p style="margin-bottom:0pt; font-size:11pt"><span style="font-weight:bold">2)</span></p>
-        </td>
         <td style="width:411.9pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
           <p style="margin-bottom:0pt; text-align:justify; font-size:11pt"><span style="font-weight:bold">PIHAK KEDUA
             </span><span>bertanggung jawab terhadap benda uji / bahan uji yang diserahterimakan kepada petugas
@@ -530,9 +413,6 @@
         </td>
       </tr>
       <tr>
-        <td style="width:17.3pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
-          <p style="margin-bottom:0pt; font-size:11pt"><span style="font-weight:bold">3)</span></p>
-        </td>
         <td style="width:411.9pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
           <p style="margin-bottom:0pt; text-align:justify; font-size:11pt"><span style="font-weight:bold">PIHAK PERTAMA
             </span><span>wajib melakukan pengujian di laboratorium sesuai dengan ketentuan yang diuraikan pada
@@ -562,18 +442,12 @@
     <p style="margin-bottom:0pt"><span style="-aw-import:ignore">&#xa0;</span></p>
     <table cellspacing="0" cellpadding="0" class="TableGrid" style="margin-bottom:0pt; border-collapse:collapse">
       <tr>
-        <td style="width:17.3pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
-          <p style="margin-bottom:0pt; font-size:11pt"><span style="font-weight:bold">1)</span></p>
-        </td>
         <td style="width:411.9pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
           <p style="margin-bottom:0pt; text-align:justify; font-size:11pt"><span>Perhitungan biaya pengujian berdasarkan
               pada Peraturan Menteri Keuangan nomor 126/PMK.02/2021.</span></p>
         </td>
       </tr>
       <tr>
-        <td style="width:17.3pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
-          <p style="margin-bottom:0pt; font-size:11pt"><span style="font-weight:bold">2)</span></p>
-        </td>
         <td style="width:411.9pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
           <p style="margin-bottom:0pt; text-align:justify; font-size:11pt"><span style="font-weight:bold">PIHAK KEDUA
             </span><span>berkewajiban membayar seluruh biaya pengujian sebesar </span><span style="font-weight:bold">Rp.
@@ -583,9 +457,6 @@
         </td>
       </tr>
       <tr>
-        <td style="width:17.3pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
-          <p style="margin-bottom:0pt; font-size:11pt"><span style="font-weight:bold">3)</span></p>
-        </td>
         <td style="width:411.9pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
           <p style="margin-bottom:0pt; text-align:justify; font-size:11pt"><span>Sura Perjanjian Pengujian dibuat dan
               ditandatangani setelah </span><span style="font-weight:bold">PIHAK KEDUA </span><span>membayar seluruh
@@ -593,9 +464,6 @@
         </td>
       </tr>
       <tr style="height:2.9pt">
-        <td style="width:17.3pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
-          <p style="margin-bottom:0pt; font-size:11pt"><span style="font-weight:bold">4)</span></p>
-        </td>
         <td style="width:411.9pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
           <p style="margin-bottom:0pt; text-align:justify; font-size:11pt"><span>Waktu penyetoran ke Kantor Kas Negara
               paling lambat 3 (tiga) hari setelah penandatanganan Surat Perjanjian Pengujian.</span></p>
@@ -624,9 +492,6 @@
     <p style="margin-bottom:0pt"><span style="-aw-import:ignore">&#xa0;</span></p>
     <table cellspacing="0" cellpadding="0" class="TableGrid" style="margin-bottom:0pt; border-collapse:collapse">
       <tr>
-        <td style="width:17.3pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
-          <p style="margin-bottom:0pt; font-size:11pt"><span style="font-weight:bold">1)</span></p>
-        </td>
         <td style="width:411.9pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
           <p style="margin-bottom:0pt; text-align:justify; font-size:11pt"><span>Penyelesaian Pengujian dalam waktu ……
               (………………..) hari terhitung sejak </span><span style="font-weight:bold">PIHAK KEDUA </span><span>membayar
@@ -634,9 +499,6 @@
         </td>
       </tr>
       <tr>
-        <td style="width:17.3pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
-          <p style="margin-bottom:0pt; font-size:11pt"><span style="font-weight:bold">2)</span></p>
-        </td>
         <td style="width:411.9pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
           <p style="margin-bottom:0pt; text-align:justify; font-size:11pt"><span>Masa penyelesaian pengujian dapat
               bertambah apabila didapati kondisi seperti yang akan diuraikan dalam</span><span style="font-weight:bold">
@@ -679,8 +541,9 @@
         </td>
       </tr>
     </table>
-    <p><span style="-aw-import:ignore">&#xa0;</span></p>
-    <p><span style="-aw-import:ignore">&#xa0;</span></p>
+    
+    <div class="page-break"></div>
+    
     <table cellspacing="0" cellpadding="0" class="TableGrid" style="margin-bottom:0pt; border-collapse:collapse">
       <tr>
         <td style="width:440pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
@@ -701,18 +564,12 @@
     <p style="margin-bottom:0pt"><span style="-aw-import:ignore">&#xa0;</span></p>
     <table cellspacing="0" cellpadding="0" class="TableGrid" style="margin-bottom:0pt; border-collapse:collapse">
       <tr>
-        <td style="width:17.3pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
-          <p style="margin-bottom:0pt; font-size:11pt"><span style="font-weight:bold">1)</span></p>
-        </td>
         <td style="width:411.9pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
           <p style="margin-bottom:0pt; text-align:justify; font-size:11pt"><span>Laporan Hasil Pengujian Material
               diperiksa oleh Pelaksana Teknik dan disetujui oleh Kepala Seksi Pembangunan Jalan dan Jembatan.</span></p>
         </td>
       </tr>
       <tr>
-        <td style="width:17.3pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
-          <p style="margin-bottom:0pt; font-size:11pt"><span style="font-weight:bold">2)</span></p>
-        </td>
         <td style="width:411.9pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
           <p style="margin-bottom:0pt; text-align:justify; font-size:11pt"><span>Masa Pemeriksaan dan Persetujuan
               Laporan Hasil Pengujian Material paling lama 7 (tujuh) hari kerja setelah pengujian selesai
@@ -720,9 +577,6 @@
         </td>
       </tr>
       <tr>
-        <td style="width:17.3pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
-          <p style="margin-bottom:0pt; font-size:11pt"><span style="font-weight:bold">3)</span></p>
-        </td>
         <td style="width:411.9pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
           <p style="margin-bottom:0pt; text-align:justify; font-size:11pt"><span>Laporan Hasil Pengujian dimaksud pada
             </span><span style="font-weight:bold">PASAL V</span><span>, dapat diserahterimakan kepada </span><span
@@ -730,7 +584,6 @@
         </td>
       </tr>
     </table>
-    <p><span style="-aw-import:ignore">&#xa0;</span></p>
     <p><span style="-aw-import:ignore">&#xa0;</span></p>
     <table cellspacing="0" cellpadding="0" class="TableGrid" style="margin-bottom:0pt; border-collapse:collapse">
       <tr>
@@ -761,7 +614,6 @@
       </tr>
     </table>
     <p><span style="-aw-import:ignore">&#xa0;</span></p>
-    <p><span style="-aw-import:ignore">&#xa0;</span></p>
     <table cellspacing="0" cellpadding="0" class="TableGrid" style="margin-bottom:0pt; border-collapse:collapse">
       <tr>
         <td style="width:440pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
@@ -790,7 +642,6 @@
         </td>
       </tr>
     </table>
-    <p><span style="-aw-import:ignore">&#xa0;</span></p>
     <p><span style="-aw-import:ignore">&#xa0;</span></p>
     <table cellspacing="0" cellpadding="0" class="TableGrid" style="margin-bottom:0pt; border-collapse:collapse">
       <tr>
@@ -822,9 +673,6 @@
         </td>
       </tr>
     </table>
-    <p><span style="-aw-import:ignore">&#xa0;</span></p>
-    <p><span style="-aw-import:ignore">&#xa0;</span></p>
-    <p><span style="-aw-import:ignore">&#xa0;</span></p>
     <p><span style="-aw-import:ignore">&#xa0;</span></p>
     <table cellspacing="0" cellpadding="0" class="TableGrid" style="margin-bottom:0pt; border-collapse:collapse">
       <tr>
@@ -869,210 +717,109 @@
     <p><span style="-aw-import:ignore">&#xa0;</span></p>
     <table cellspacing="0" cellpadding="0" class="TableGrid" style="margin-bottom:0pt; border-collapse:collapse">
       <tr>
-        <td style="width:17.3pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
-          <p style="margin-bottom:0pt; font-size:11pt"><span style="-aw-import:ignore">&#xa0;</span></p>
-        </td>
-        <td style="width:111.3pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
-          <p style="margin-bottom:0pt; text-align:center; font-size:11pt"><span style="font-weight:bold">PIHAK
-              KEDUA,</span></p>
-        </td>
-        <td style="width:64.35pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
-          <p style="margin-bottom:0pt; font-size:11pt"><span style="-aw-import:ignore">&#xa0;</span></p>
-        </td>
-        <td style="width:64.35pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
-          <p style="margin-bottom:0pt; font-size:11pt"><span style="-aw-import:ignore">&#xa0;</span></p>
-        </td>
-        <td style="width:113.7pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
-          <p style="margin-bottom:0pt; text-align:center; font-size:11pt"><span style="font-weight:bold">PIHAK
-              PERTAMA,</span></p>
-        </td>
-        <td style="width:15pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
-          <p style="margin-bottom:0pt; font-size:11pt"><span style="-aw-import:ignore">&#xa0;</span></p>
-        </td>
-      </tr>
-      <tr>
-        <td style="width:17.3pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
-          <p style="margin-bottom:0pt; font-size:11pt"><span style="-aw-import:ignore">&#xa0;</span></p>
-        </td>
-        <td style="width:111.3pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
-          <p style="margin-bottom:0pt; font-size:11pt"><span style="-aw-import:ignore">&#xa0;</span></p>
-        </td>
-        <td style="width:64.35pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
-          <p style="margin-bottom:0pt; font-size:11pt"><span style="-aw-import:ignore">&#xa0;</span></p>
-        </td>
-        <td style="width:64.35pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
-          <p style="margin-bottom:0pt; font-size:11pt"><span style="-aw-import:ignore">&#xa0;</span></p>
-        </td>
-        <td style="width:113.7pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
-          <p style="margin-bottom:0pt; font-size:11pt"><span style="-aw-import:ignore">&#xa0;</span></p>
-        </td>
-        <td style="width:15pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
-          <p style="margin-bottom:0pt; font-size:11pt"><span style="-aw-import:ignore">&#xa0;</span></p>
-        </td>
-      </tr>
-      <tr>
-        <td style="width:17.3pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
-          <p style="margin-bottom:0pt; font-size:11pt"><span style="-aw-import:ignore">&#xa0;</span></p>
-        </td>
-        <td style="width:111.3pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
-          <p style="margin-bottom:0pt; font-size:11pt"><span style="-aw-import:ignore">&#xa0;</span></p>
-        </td>
-        <td style="width:64.35pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
-          <p style="margin-bottom:0pt; font-size:11pt"><span style="-aw-import:ignore">&#xa0;</span></p>
-        </td>
-        <td style="width:64.35pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
-          <p style="margin-bottom:0pt; font-size:11pt"><span style="-aw-import:ignore">&#xa0;</span></p>
-        </td>
-        <td style="width:113.7pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
-          <p style="margin-bottom:0pt; font-size:11pt"><span style="-aw-import:ignore">&#xa0;</span></p>
-        </td>
-        <td style="width:15pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
-          <p style="margin-bottom:0pt; font-size:11pt"><span style="-aw-import:ignore">&#xa0;</span></p>
-        </td>
-      </tr>
-      <tr>
-        <td style="width:17.3pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
-          <p style="margin-bottom:0pt; font-size:11pt"><span style="-aw-import:ignore">&#xa0;</span></p>
-        </td>
-        <td style="width:111.3pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
-          <p style="margin-bottom:0pt; font-size:11pt"><span style="-aw-import:ignore">&#xa0;</span></p>
-        </td>
-        <td style="width:64.35pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
-          <p style="margin-bottom:0pt; font-size:11pt"><span style="-aw-import:ignore">&#xa0;</span></p>
-        </td>
-        <td style="width:64.35pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
-          <p style="margin-bottom:0pt; font-size:11pt"><span style="-aw-import:ignore">&#xa0;</span></p>
-        </td>
-        <td style="width:113.7pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
-          <p style="margin-bottom:0pt; font-size:11pt"><span style="-aw-import:ignore">&#xa0;</span></p>
-        </td>
-        <td style="width:15pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
-          <p style="margin-bottom:0pt; font-size:11pt"><span style="-aw-import:ignore">&#xa0;</span></p>
-        </td>
-      </tr>
-      <tr>
-        <td style="width:17.3pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
-          <p style="margin-bottom:0pt; font-size:11pt"><span style="-aw-import:ignore">&#xa0;</span></p>
-        </td>
-        <td style="width:111.3pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
-          <p style="margin-bottom:0pt; font-size:11pt"><span style="-aw-import:ignore">&#xa0;</span></p>
-        </td>
-        <td style="width:64.35pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
-          <p style="margin-bottom:0pt; font-size:11pt"><span style="-aw-import:ignore">&#xa0;</span></p>
-        </td>
-        <td style="width:64.35pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
-          <p style="margin-bottom:0pt; font-size:11pt"><span style="-aw-import:ignore">&#xa0;</span></p>
-        </td>
-        <td style="width:113.7pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
-          <p style="margin-bottom:0pt; font-size:11pt"><span style="-aw-import:ignore">&#xa0;</span></p>
-        </td>
-        <td style="width:15pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
-          <p style="margin-bottom:0pt; font-size:11pt"><span style="-aw-import:ignore">&#xa0;</span></p>
-        </td>
-      </tr>
-      <tr>
-        <td style="width:17.3pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
-          <p style="margin-bottom:0pt; font-size:11pt"><span style="-aw-import:ignore">&#xa0;</span></p>
-        </td>
-        <td style="width:111.3pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
-          <p style="margin-bottom:0pt; font-size:11pt"><span style="-aw-import:ignore">&#xa0;</span></p>
-        </td>
-        <td style="width:64.35pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
-          <p style="margin-bottom:0pt; font-size:11pt"><span style="-aw-import:ignore">&#xa0;</span></p>
-        </td>
-        <td style="width:64.35pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
-          <p style="margin-bottom:0pt; font-size:11pt"><span style="-aw-import:ignore">&#xa0;</span></p>
-        </td>
-        <td style="width:113.7pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
-          <p style="margin-bottom:0pt; font-size:11pt"><span style="-aw-import:ignore">&#xa0;</span></p>
-        </td>
-        <td style="width:15pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
-          <p style="margin-bottom:0pt; font-size:11pt"><span style="-aw-import:ignore">&#xa0;</span></p>
-        </td>
-      </tr>
-      <tr>
-        <td style="width:17.3pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
-          <p style="margin-bottom:0pt; font-size:11pt"><span style="-aw-import:ignore">&#xa0;</span></p>
-        </td>
-        <td style="width:111.3pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
-          <p style="margin-bottom:0pt; text-align:center; font-size:11pt"><span
-              style="font-weight:bold; text-decoration:underline">Nama </span><span
-              style="font-weight:bold; font-style:italic; text-decoration:underline">Customer</span></p>
-        </td>
-        <td style="width:64.35pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
-          <p style="margin-bottom:0pt; font-size:11pt"><span style="-aw-import:ignore">&#xa0;</span></p>
-        </td>
-        <td style="width:64.35pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
-          <p style="margin-bottom:0pt; font-size:11pt"><span style="-aw-import:ignore">&#xa0;</span></p>
-        </td>
-        <td style="width:113.7pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
-          <p style="margin-bottom:0pt; text-align:center; font-size:11pt"><span
-              style="font-weight:bold; text-decoration:underline">Nama Kepala Seksi</span></p>
-        </td>
-        <td style="width:15pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
-          <p style="margin-bottom:0pt; font-size:11pt"><span style="-aw-import:ignore">&#xa0;</span></p>
-        </td>
-      </tr>
-      <tr>
-        <td style="width:17.3pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
-          <p style="margin-bottom:0pt; font-size:11pt"><span style="-aw-import:ignore">&#xa0;</span></p>
-        </td>
-        <td style="width:111.3pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
-          <p style="margin-bottom:0pt; text-align:center; font-size:11pt"><span style="font-weight:bold">Jabatan</span>
+        <td style="width:150.3pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
+          <p style="margin-bottom:0pt; text-align:center; font-size:11pt">
+            <span style="font-weight:bold">Pihak Kedua,</span>
           </p>
         </td>
-        <td style="width:64.35pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
+        <td style="width:100.70pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
           <p style="margin-bottom:0pt; font-size:11pt"><span style="-aw-import:ignore">&#xa0;</span></p>
         </td>
-        <td style="width:64.35pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
-          <p style="margin-bottom:0pt; font-size:11pt"><span style="-aw-import:ignore">&#xa0;</span></p>
-        </td>
-        <td style="width:113.7pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
-          <p style="margin-bottom:0pt; text-align:center; font-size:11pt"><span style="font-weight:bold">Jabatan</span>
+        <td style="width:150.7pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
+          <p style="margin-bottom:0pt; text-align:center; font-size:11pt">
+            <span style="font-weight:bold">Pihak Pertama,</span>
           </p>
         </td>
-        <td style="width:15pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
+      </tr>
+      <tr>
+        <td style="width:150.3pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
+          <p style="margin-bottom:0pt; font-size:11pt"><span style="-aw-import:ignore">&#xa0;</span></p>
+        </td>
+        <td style="width:100.70pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
+          <p style="margin-bottom:0pt; font-size:11pt"><span style="-aw-import:ignore">&#xa0;</span></p>
+        </td>
+        <td style="width:150.7pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
           <p style="margin-bottom:0pt; font-size:11pt"><span style="-aw-import:ignore">&#xa0;</span></p>
         </td>
       </tr>
       <tr>
-        <td style="width:17.3pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
+        <td style="width:150.3pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
           <p style="margin-bottom:0pt; font-size:11pt"><span style="-aw-import:ignore">&#xa0;</span></p>
         </td>
-        <td style="width:111.3pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
+        <td style="width:100.70pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
           <p style="margin-bottom:0pt; font-size:11pt"><span style="-aw-import:ignore">&#xa0;</span></p>
         </td>
-        <td style="width:64.35pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
+        <td style="width:150.7pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
           <p style="margin-bottom:0pt; font-size:11pt"><span style="-aw-import:ignore">&#xa0;</span></p>
         </td>
-        <td style="width:64.35pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
+      </tr>
+      <tr>
+        <td style="width:150.3pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
           <p style="margin-bottom:0pt; font-size:11pt"><span style="-aw-import:ignore">&#xa0;</span></p>
         </td>
-        <td style="width:113.7pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
+        <td style="width:100.70pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
           <p style="margin-bottom:0pt; font-size:11pt"><span style="-aw-import:ignore">&#xa0;</span></p>
         </td>
-        <td style="width:15pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
+        <td style="width:150.7pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
           <p style="margin-bottom:0pt; font-size:11pt"><span style="-aw-import:ignore">&#xa0;</span></p>
+        </td>
+      </tr>
+      <tr>
+        <td style="width:150.3pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
+          <p style="margin-bottom:0pt; font-size:11pt"><span style="-aw-import:ignore">&#xa0;</span></p>
+        </td>
+        <td style="width:100.70pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
+          <p style="margin-bottom:0pt; font-size:11pt"><span style="-aw-import:ignore">&#xa0;</span></p>
+        </td>
+        <td style="width:150.7pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
+          <p style="margin-bottom:0pt; font-size:11pt"><span style="-aw-import:ignore">&#xa0;</span></p>
+        </td>
+      </tr>
+      <tr>
+        <td style="width:150.3pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
+          <p style="margin-bottom:0pt; font-size:11pt"><span style="-aw-import:ignore">&#xa0;</span></p>
+        </td>
+        <td style="width:100.70pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
+          <p style="margin-bottom:0pt; font-size:11pt"><span style="-aw-import:ignore">&#xa0;</span></p>
+        </td>
+        <td style="width:150.7pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
+          <p style="margin-bottom:0pt; font-size:11pt"><span style="-aw-import:ignore">&#xa0;</span></p>
+        </td>
+      </tr>
+      <tr>
+        <td style="width:150.3pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
+          <p style="margin-bottom:0pt; text-align:center; font-size:11pt">
+            <span style="font-weight:bold; text-decoration:underline">{{ $item->nama_pj }}</span>
+          </p>
+        </td>
+        <td style="width:100.70pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
+          <p style="margin-bottom:0pt; font-size:11pt"><span style="-aw-import:ignore">&#xa0;</span></p>
+        </td>
+        <td style="width:150.7pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
+          <p style="margin-bottom:0pt; text-align:center; font-size:11pt">
+            <span style="font-weight:bold; text-decoration:underline">Vera Kristianawati, S.T, M.T</span>
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td style="width:150.3pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
+          <p style="margin-bottom:0pt; text-align:center; font-size:11pt">
+            <span style="font-weight:bold">{{ $item->jabatan_pj }}</span>
+          </p>
+        </td>
+        <td style="width:100.70pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
+          <p style="margin-bottom:0pt; font-size:11pt"><span style="-aw-import:ignore">&#xa0;</span></p>
+        </td>
+        <td style="width:150.7pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
+          <p style="margin-bottom:0pt; text-align:center; font-size:11pt">
+            <span style="font-weight:bold">Kepala Seksi</span>
+          </p>
         </td>
       </tr>
     </table>
-    <p><span style="-aw-import:ignore">&#xa0;</span></p>
-    <p><span style="-aw-import:ignore">&#xa0;</span></p>
-    <p><span style="-aw-import:ignore">&#xa0;</span></p>
-    <p><span style="-aw-import:ignore">&#xa0;</span></p>
-    <p><span style="-aw-import:ignore">&#xa0;</span></p>
-    <p><span style="-aw-import:ignore">&#xa0;</span></p>
-    <p><span style="-aw-import:ignore">&#xa0;</span></p>
-    <p><span style="-aw-import:ignore">&#xa0;</span></p>
-    <p><span style="-aw-import:ignore">&#xa0;</span></p>
-    <p><span style="-aw-import:ignore">&#xa0;</span></p>
-    <p><span style="-aw-import:ignore">&#xa0;</span></p>
-    <p><span style="-aw-import:ignore">&#xa0;</span></p>
-    <p><span style="-aw-import:ignore">&#xa0;</span></p>
-    <p><span style="-aw-import:ignore">&#xa0;</span></p>
-    <p><span style="-aw-import:ignore">&#xa0;</span></p>
-    <p><span style="-aw-import:ignore">&#xa0;</span></p>
-    <p><span style="-aw-import:ignore">&#xa0;</span></p>
+    
+    <div class="page-break"></div>
+    
     <table cellspacing="0" cellpadding="0" class="TableGrid" style="margin-bottom:0pt; border-collapse:collapse">
       <tr>
         <td colspan="3" style="width:440pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
@@ -1169,8 +916,7 @@
         <tr>
           <td
             style="width:203.5pt; border-right-style:solid; border-right-width:0.75pt; border-bottom-style:solid; border-bottom-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt; vertical-align:top; -aw-border-bottom:0.5pt single; -aw-border-right:0.5pt single">
-            <p style="margin-bottom:0pt; text-align:center; font-size:11pt"><span style="font-weight:bold">Nama
-                Pekerjaan</span></p>
+            <p style="margin-bottom:0pt; text-align:center; font-size:11pt"><span style="font-weight:bold">Nama Pekerjaan</span></p>
           </td>
           <td
             style="width:35.55pt; border-right-style:solid; border-right-width:0.75pt; border-left-style:solid; border-left-width:0.75pt; border-bottom-style:solid; border-bottom-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt; vertical-align:top; -aw-border-bottom:0.5pt single; -aw-border-left:0.5pt single; -aw-border-right:0.5pt single">

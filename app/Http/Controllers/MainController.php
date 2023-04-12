@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\MyFunction;
 use App\Models\JenisPengujian;
 use App\Models\Pengujian;
 use App\Models\Perusahaan;
@@ -100,7 +101,8 @@ class MainController extends Controller
         $item = Perusahaan::find($id);
 
         if ($type == 'surat-perintah-pengujian') {
-            $pdf->loadView('pdf.surat-perintah', compact('item'));
+            $terbilang = MyFunction::terbilang($item->jenisPengujian()->itemPengujian->sum('harga'));
+            $pdf->loadView('pdf.surat-perintah', compact('item', 'terbilang'));
             $item->detail->surat_perintah_download += 1;
             $item->detail->save();
         } elseif ($type == 'surat-pengantar-pengujian') {
