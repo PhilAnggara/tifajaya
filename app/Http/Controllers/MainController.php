@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\MyFunction;
+use App\Helpers\VsmHelper;
+use App\Models\Document;
 use App\Models\JenisPengujian;
 use App\Models\Pengujian;
 use App\Models\Perusahaan;
@@ -138,5 +140,51 @@ class MainController extends Controller
             $pathToFile = public_path().Storage::url($item->detail->laporan_unapproved);    // delete this line on production
             return response()->file($pathToFile);
         }
+    }
+
+    public function search()
+    {
+        // $vsm = new VsmHelper();
+        // $text = $vsm->getTextFromPdf('files/laporan-pengujian/Laporan Pengujian (Belum ditandatangani)-(AGRT-230208-5326).pdf');
+        // $text = $vsm->getTextFromPdf('files/sample-1.pdf');
+        // $text = $vsm->getTextFromPdf('files/test/2022 SPP 01-I PT. ANUGERAH KARYA AGRA SENTOSA - PT. SENTRAL MULTIKON INDI - PT. PAPUA KARYA MANDIRI, KSO.pdf');
+        // dd($text);
+        
+
+        // $query = 'Pengujian bahan material di laboratorium';
+        // $documents = [
+        //     'Pihak kedua melakukan pengujian bahan material di laboratorium',
+        //     'PIHAK PERTAMA memberikan material untuk di uji',
+        //     'Pengujian bahan MATERIAL dilakukan oleh PIHAK KEDUA dan akan diuji untuk beberapa hari kedepan',
+        //     'Pihak Kedua menyelesaikan pengujian di laboratorium',
+        //     'Hasil uji material telah di dapatkan'
+        // ];
+
+        // $documents = Document::all();
+        // return response()->json($documents);
+
+        // $vsm = new VsmHelper();
+        // $test = $vsm->vsmSearch('material uji pertama');
+
+        // dd($test);
+
+        return view('pages.search');
+    }
+
+    public function uploadDokumen(Request $request)
+    {
+        $vsm = new VsmHelper();
+        if ($request->hasFile('documents')) {
+            $documents = $request->file('documents');
+            
+            foreach ($documents as $document) {
+                $data['nama_file'] = $document->getClientOriginalName();
+                $data['path'] = $document->storeAs('files/documents', $data['nama_file'], 'public');
+                $data['text'] = Str::before(Str::before($data['nama_file'], '.pdf'), '.PDF') .' '. $vsm->getTextFromPdf('files/documents/'.$data['nama_file']);
+                Document::create($data);
+            }
+        }
+        
+        return redirect()->back()->with('success', 'Dokumen berhasil diunggah!');
     }
 }

@@ -6,12 +6,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class DetailPengujian extends Model
+class Document extends Model
 {
     use HasFactory;
     use SoftDeletes;
 
-    protected $table = 'detail_pengujian';
+    protected $table = 'documents';
 
     protected $guarded = [
         'id'
@@ -20,9 +20,4 @@ class DetailPengujian extends Model
     protected $hidden = [
 
     ];
-
-    public function perusahaan()
-    {
-        return $this->belongsTo(Perusahaan::class, 'id_perusahaan', 'id');
-    }
 }

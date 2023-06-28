@@ -68,6 +68,15 @@
           </li>
         @endif
 
+        @if (auth()->user()->role == 'Admin' || auth()->user()->role == 'Kepala Seksi')
+          <li class="sidebar-item {{ Request::is('admin/search') ? 'active' : '' }}">
+            <a href="{{ route('search') }}" class='sidebar-link'>
+              <i class="far fa-print-magnifying-glass"></i>
+              <span>VSM</span>
+            </a>
+          </li>
+        @endif
+
       </ul>
     </div>
     <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>

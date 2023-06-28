@@ -33,6 +33,9 @@ Route::prefix('admin')->middleware(['auth', 'role:Admin,Kepala Seksi,Kepala Lab'
 
     Route::get('print-pdf/{type}/{id}', [MainController::class, 'printPDF'])->name('print-pdf');
     Route::get('print-pdf-unapproved/{type}/{id}/{filename}', [MainController::class, 'printPDFunapproved'])->name('print-pdf-unapproved');
+
+    Route::get('search', [MainController::class, 'search'])->name('search');
+    Route::post('upload-dokumen', [MainController::class, 'uploadDokumen'])->name('upload-dokumen');
 });
 
 require __DIR__.'/auth.php';
