@@ -178,6 +178,11 @@ class MainController extends Controller
             $documents = $request->file('documents');
             
             foreach ($documents as $document) {
+                $extension = $document->getClientOriginalExtension();
+                if (strtolower($extension) !== 'pdf') {
+                    return redirect()->back()->with('error', 'File yang diunggah harus berupa PDF!');
+                }
+
                 $data['nama_file'] = $document->getClientOriginalName();
                 $data['path'] = $document->storeAs('files/documents', $data['nama_file'], 'public');
                 $data['text'] = Str::before(Str::before($data['nama_file'], '.pdf'), '.PDF') .' '. $vsm->getTextFromPdf('files/documents/'.$data['nama_file']);

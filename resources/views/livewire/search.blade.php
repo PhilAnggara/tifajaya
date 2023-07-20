@@ -44,9 +44,11 @@
                   <a href="{{ Storage::url($result->path) }}" target="_blank" class="stretched-link"></a>
                   <p class="card-text text-muted">{{ $carbon::parse($result->created_at)->isoFormat('D MMMM YYYY') }}</p>
                 </div>
+                {{--
                 <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success">
                   {{ number_format($result->cosineSimilarity, 3) }}
                 </span>
+                --}}
               </div>
             </div>
           </div>

@@ -41,4 +41,13 @@
     }
   });
 </script>
+
+@if (session('error'))
+  <script>
+    Swal.fire({
+      icon: 'error',
+      title: '{{ session('error') }}',
+    })
+  </script>
+@endif
 @endpush
