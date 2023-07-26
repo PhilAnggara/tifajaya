@@ -20,11 +20,6 @@ class MainController extends Controller
         $jenis_pengujian = JenisPengujian::with('itemPengujian')->get();
         $harga = json_decode(file_get_contents(storage_path('app/public/files/harga.json'), true));
 
-        // return response()->json([
-        //     'harga' => $harga->jenis_pengujian[0]
-        // ]);
-        // dd($harga->jenis_pengujian[0]->item_pengujian);
-
         return view('pages.home', [
             'jenis_pengujian' => $jenis_pengujian,
             'harga' => $harga->jenis_pengujian
@@ -144,30 +139,6 @@ class MainController extends Controller
 
     public function search()
     {
-        // $vsm = new VsmHelper();
-        // $text = $vsm->getTextFromPdf('files/laporan-pengujian/Laporan Pengujian (Belum ditandatangani)-(AGRT-230208-5326).pdf');
-        // $text = $vsm->getTextFromPdf('files/sample-1.pdf');
-        // $text = $vsm->getTextFromPdf('files/test/2022 SPP 01-I PT. ANUGERAH KARYA AGRA SENTOSA - PT. SENTRAL MULTIKON INDI - PT. PAPUA KARYA MANDIRI, KSO.pdf');
-        // dd($text);
-        
-
-        // $query = 'Pengujian bahan material di laboratorium';
-        // $documents = [
-        //     'Pihak kedua melakukan pengujian bahan material di laboratorium',
-        //     'PIHAK PERTAMA memberikan material untuk di uji',
-        //     'Pengujian bahan MATERIAL dilakukan oleh PIHAK KEDUA dan akan diuji untuk beberapa hari kedepan',
-        //     'Pihak Kedua menyelesaikan pengujian di laboratorium',
-        //     'Hasil uji material telah di dapatkan'
-        // ];
-
-        // $documents = Document::all();
-        // return response()->json($documents);
-
-        // $vsm = new VsmHelper();
-        // $test = $vsm->vsmSearch('material uji pertama');
-
-        // dd($test);
-
         return view('pages.search');
     }
 
@@ -176,20 +147,29 @@ class MainController extends Controller
         $vsm = new VsmHelper();
         if ($request->hasFile('documents')) {
             $documents = $request->file('documents');
+
+            $uploadedDocument = 0;
             
             foreach ($documents as $document) {
                 $extension = $document->getClientOriginalExtension();
                 if (strtolower($extension) !== 'pdf') {
-                    return redirect()->back()->with('error', 'File yang diunggah harus berupa PDF!');
+                    $request->session()->flash('notPdf', 'File yang diunggah harus berupa PDF!');
+                    // Jika file yang diunggah bukan PDF, maka akan diabaikan
+                    continue;
                 }
 
                 $data['nama_file'] = $document->getClientOriginalName();
                 $data['path'] = $document->storeAs('files/documents', $data['nama_file'], 'public');
                 $data['text'] = Str::before(Str::before($data['nama_file'], '.pdf'), '.PDF') .' '. $vsm->getTextFromPdf('files/documents/'.$data['nama_file']);
                 Document::create($data);
+                $uploadedDocument++;
             }
         }
         
-        return redirect()->back()->with('success', 'Dokumen berhasil diunggah!');
+        if ($uploadedDocument > 0) {
+            return redirect()->back()->with('success', $uploadedDocument.'/'.$request->file_count.' dokumen berhasil diunggah!');
+        } else {
+            return redirect()->back()->with('error', 'Gagal mengunggah dokumen!');
+        }
     }
 }

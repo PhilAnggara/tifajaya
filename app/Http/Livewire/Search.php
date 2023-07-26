@@ -11,8 +11,11 @@ class Search extends Component
 {
     public $items;
     public $results;
+    public $precision;
+    public $recall;
     public $query;
     public $status = false;
+    public $showPrecisionAndRecall;
 
     public function mount()
     {
@@ -32,14 +35,16 @@ class Search extends Component
         }
         $vsm = new VsmHelper();
         
-        $this->results = $vsm->vsmSearch($this->query);
+        $vsmResults = $vsm->vsmSearch($this->query);
+        $this->results = $vsmResults['sortedDocuments'];
+        $this->precision = $vsmResults['precision'];
+        $this->recall = $vsmResults['recall'];
+        $this->showPrecisionAndRecall = $vsmResults['showPrecisionAndRecall'];
 
         if ($this->results->count()) {
             $this->status = 'found';
         } else {
             $this->status = 'not found';
         }
-
-        // dd($this->status, $this->results);
     }
 }

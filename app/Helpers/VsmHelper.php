@@ -13,7 +13,8 @@ class VsmHelper
 {
     public function getTextFromPdf($path)
     {
-        $file = public_path('storage/'.$path);
+        $file = storage_path('app/public/' . $path);
+        // $file = public_path('storage/'.$path);  // delete this line on production
         $parser = new Parser();
         $pdf = $parser->parseFile($file);
         $text = $pdf->getText();
@@ -91,8 +92,30 @@ class VsmHelper
         // Urutkan dokumen berdasarkan peringkat
         $sortedDocuments = $documents->sortByDesc('cosineSimilarity');
 
-        return $sortedDocuments->where('cosineSimilarity');
-        // return response()->json($sortedDocuments);
+        $results = $sortedDocuments->where('cosineSimilarity');
+
+        // Inisialisasi data ground truth
+        $groundTruthPath = storage_path('/app/public/json/ground_truth.json');
+        $groundTruth = json_decode(file_get_contents($groundTruthPath), true);
+
+        $precision = 0;
+        $recall = 0;
+        $showPrecisionAndRecall = false;
+
+        // Periksa apakah query ada dalam data ground truth
+        if (isset($groundTruth[strtolower($query)])) {
+            // Hitung precision dan recall
+            $precision = $this->calculatePrecision($results, strtolower($query), $groundTruth);
+            $recall = $this->calculateRecall($results, strtolower($query), $groundTruth);
+            $showPrecisionAndRecall = true;
+        }
+
+        return [
+            'sortedDocuments' => $results,
+            'precision' => $precision,
+            'recall' => $recall,
+            'showPrecisionAndRecall' => $showPrecisionAndRecall
+        ];
     }
 
     // Fungsi untuk menghitung vektor query
@@ -178,5 +201,48 @@ class VsmHelper
         }
 
         return $cosineSimilarity;
+    }
+
+    // Fungsi untuk menghitung precision
+    private function calculatePrecision($sortedDocuments, $query, $groundTruth)
+    {
+        $relevantDocumentsFound = 0;
+
+        foreach ($sortedDocuments as $document) {
+            // Cek apakah dokumen ada dalam data ground truth untuk query tertentu
+            if (in_array(rtrim(Str::before($document->nama_file, '.')), $groundTruth[$query])) {
+                $relevantDocumentsFound++;
+            }
+        }
+
+        $precision = $relevantDocumentsFound / count($sortedDocuments);
+        $precisionStr = $relevantDocumentsFound.' / '.count($sortedDocuments).' = ';
+
+        return [
+            'precision' => $precision,
+            'precisionStr' => $precisionStr,
+        ];
+    }
+
+    // Fungsi untuk menghitung recall
+    private function calculateRecall($sortedDocuments, $query, $groundTruth)
+    {
+        $relevantDocumentsFound = 0;
+        $totalRelevantDocuments = count($groundTruth[$query]);
+
+        foreach ($sortedDocuments as $document) {
+            // Cek apakah dokumen ada dalam data ground truth untuk query tertentu
+            if (in_array(rtrim(Str::before($document->nama_file, '.')), $groundTruth[$query])) {
+                $relevantDocumentsFound++;
+            }
+        }
+
+        $recall = $relevantDocumentsFound / $totalRelevantDocuments;
+        $recallStr = $relevantDocumentsFound.' / '.$totalRelevantDocuments.' = ';
+
+        return [
+            'recall' => $recall,
+            'recallStr' => $recallStr,
+        ];
     }
 }
